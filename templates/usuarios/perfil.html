@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Meu Perfil
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/usuarios/perfil.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="perfil">
+
+    <div class="perfil-container">
+
+        <h1>Meu Perfil</h1>
+
+        <div class="perfil-box">
+
+            <p>
+                <strong>Nome:</strong>
+                {{ usuario.nome }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ usuario.email }}
+            </p>
+
+            <p>
+                <strong>Telefone:</strong>
+                {{ usuario.telefone }}
+            </p>
+
+            <p>
+                <strong>CPF:</strong>
+                {{ usuario.cpf }}
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

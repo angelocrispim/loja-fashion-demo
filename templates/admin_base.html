@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {% block title %}
+        Painel Admin
+        {% endblock %}
+
+    </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='/css/admin/admin.css') }}">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            {% if config and config.logo %}
+
+                <img
+                    src="{{ config.logo }}"
+                    alt="Logo">
+
+            {% else %}
+
+                Loja <span>Fashion</span>
+
+            {% endif %}
+
+        </div>
+        
+<!-- navbar-->
+        <nav class="menu">
+
+        <!-- DASHBOARD -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin">
+                    Dashboard Principal
+                </a>
+
+                <a href="/admin/dashboard-financeiro">
+                    Dashboard Financeiro
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- PRODUTOS -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-shirt"></i>
+                Produtos
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin/produtos">
+                    Lista de Produtos
+                </a>
+
+                <a href="/admin/cadastrar-produto">
+                    Cadastrar Produto
+                </a>
+
+                <a href="/admin/estoque-baixo">
+                    Estoque Baixo
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- VENDAS -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+                Vendas
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin/vendas">
+                    Todas as Vendas
+                </a>
+
+                <a href="/admin/relatorio-vendas">
+                    Relatório de Vendas
+                </a>
+
+                <a href="/admin/produtos-mais-vendidos">
+                    Produtos Mais Vendidos
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- PEDIDOS -->
+        <a href="/admin/pedidos">
+
+            <i class="fa-solid fa-box"></i>
+            Pedidos
+
+        </a>
+
+        <!-- CLIENTES -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-users"></i>
+                Clientes
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin/clientes">
+                    Todos os Clientes
+                </a>
+
+                <a href="/admin/melhores-clientes">
+                    Melhores Clientes
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- FUNCIONÁRIOS -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-user-tie"></i>
+                Funcionários
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin/funcionarios">
+                    Funcionários
+                </a>
+
+                <a href="/admin/ranking-vendedores">
+                    Ranking Vendedores
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- CAIXA -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-cash-register"></i>
+                Caixa
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/caixa">
+                    Abrir Caixa
+                </a>
+
+                <a href="/admin/fechamentos-caixa">
+                    Fechamentos
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- FINANCEIRO -->
+        <div class="menu-group">
+
+            <button class="menu-toggle">
+
+                <i class="fa-solid fa-chart-column"></i>
+                Financeiro
+
+            </button>
+
+            <div class="submenu">
+
+                <a href="/admin/financeiro">
+                    Fluxo Financeiro
+                </a>
+
+                <a href="/admin/despesas">
+                    Nova Despesa
+                </a>
+
+                <a href="/admin/gerenciar-despesas">
+                    Gerenciar Despesas
+                </a>
+
+                <a href="/admin/relatorio-lucro">
+                    Relatório de Lucro
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- CONFIG -->
+        <div class="menu-group">
+
+            <a href="javascript:void(0)"
+            class="menu-toggle">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Configurações
+
+            </a>
+
+            <div class="submenu">
+
+                <a href="/admin/configuracoes">
+
+                    Dados da Loja
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- SAIR -->
+        <a href="/logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Sair
+
+        </a>
+
+    </nav>
+
+<!--Fim navbar-->
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+
+    <main class="content">
+
+        <!-- TOPO -->
+
+        <div class="topo">
+
+            <h1>
+
+                {% block page_title %}
+                Painel Administrativo
+                {% endblock %}
+
+            </h1>
+
+            <div class="usuario">
+
+                {{ usuario.nome }}
+
+                {% if usuario.is_superadmin %}
+                    - SUPER ADMIN
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- CONTEÚDO PÁGINA -->
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+<script>
+
+document.querySelectorAll(".menu-toggle").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        const submenu = btn.nextElementSibling;
+
+        submenu.style.display =
+            submenu.style.display === "block"
+            ? "none"
+            : "block";
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>

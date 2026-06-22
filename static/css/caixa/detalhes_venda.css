@@ -1,0 +1,259 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#f4f6f9;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    padding:40px;
+
+}
+
+.container{
+
+    max-width:1000px;
+
+    margin:auto;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.1);
+
+}
+
+.card h1{
+
+    text-align:center;
+
+    color:#111;
+
+    margin-bottom:30px;
+
+    font-size:36px;
+
+}
+
+.info{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.info p{
+
+    background:#f8f9fa;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+}
+
+.info strong{
+
+    color:#0f5c2e;
+
+}
+
+hr{
+
+    border:none;
+
+    height:1px;
+
+    background:#ddd;
+
+    margin:30px 0;
+
+}
+
+h2{
+
+    margin-bottom:20px;
+
+    color:#111;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-bottom:30px;
+
+}
+
+thead{
+
+    background:#111;
+
+    color:white;
+
+}
+
+th{
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+tbody tr:hover{
+
+    background:#f8f9fa;
+
+}
+
+.acoes{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+.acoes button{
+
+    border:none;
+
+    background:#0f5c2e;
+
+    color:white;
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.acoes button:hover{
+
+    background:#0c4a25;
+
+}
+
+.acoes a{
+
+    background:#111;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.acoes a:hover{
+
+    background:#333;
+
+}
+
+.cabecalho-cupom{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    padding-bottom:20px;
+
+    border-bottom:2px dashed #ccc;
+
+}
+
+.cabecalho-cupom h2{
+
+    font-size:32px;
+
+    color:#0f5c2e;
+
+    margin-bottom:15px;
+
+}
+
+.dados-venda{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.dados-venda p{
+
+    background:#f8f9fa;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+}
+
+.pagamento-info{
+
+    margin-top:25px;
+
+}
+
+.info p{
+
+    border-left:5px solid #0f5c2e;
+
+}

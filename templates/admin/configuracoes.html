@@ -1,0 +1,168 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Configurações da Loja
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/configuracoes.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="config-page">
+
+    <div class="page-header">
+
+        <h1>
+            Configurações da Loja
+        </h1>
+
+        <p>
+            Personalize as informações da empresa
+        </p>
+
+    </div>
+
+    <div class="config-card">
+
+        <form
+            action="/admin/configuracoes"
+            method="POST"
+            enctype="multipart/form-data">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Nome da Loja
+                    </label>
+
+                    <input
+                        type="text"
+                        name="nome_loja"
+                        value="{{ config.nome_loja if config else '' }}"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Telefone
+                    </label>
+
+                    <input
+                        type="text"
+                        name="telefone"
+                        value="{{ config.telefone if config else '' }}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="text"
+                        name="whatsapp"
+                        value="{{ config.whatsapp if config else '' }}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ config.email if config else '' }}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Instagram
+                    </label>
+
+                    <input
+                        type="text"
+                        name="instagram"
+                        value="{{ config.instagram if config else '' }}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Cidade
+                    </label>
+
+                    <input
+                        type="text"
+                        name="cidade"
+                        value="{{ config.cidade if config else '' }}">
+
+                </div>
+
+            </div>
+
+            <div class="form-group full">
+
+                <label>
+                    Endereço
+                </label>
+
+                <input
+                    type="text"
+                    name="endereco"
+                    value="{{ config.endereco if config else '' }}">
+            </div>
+
+            <div class="form-group full">
+
+                <label>
+                    Logo da Loja
+                </label>
+
+                <input
+                    type="file"
+                    name="logo">
+
+            </div>
+
+            {% if config and config.logo %}
+
+            <div class="logo-preview">
+
+                <img
+                    src="{{ config.logo }}"
+                    alt="Logo">
+
+            </div>
+
+            {% endif %}
+
+            <button
+                type="submit"
+                class="btn-salvar">
+
+                Salvar Configurações
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Clientes
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/cliente.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>
+        Clientes Cadastrados
+    </h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Nome</th>
+
+                <th>Email</th>
+
+                <th>Telefone</th>
+
+                <th>Cidade</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for cliente in clientes %}
+
+            <tr>
+
+                <td>
+                    {{ cliente.id }}
+                </td>
+
+                <td>
+                    {{ cliente.nome }}
+                </td>
+
+                <td>
+                    {{ cliente.email }}
+                </td>
+
+                <td>
+                    {{ cliente.telefone }}
+                </td>
+
+                <td>
+                    {{ cliente.cidade }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

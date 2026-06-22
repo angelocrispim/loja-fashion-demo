@@ -1,0 +1,79 @@
+{% extends "admin_base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="/static/css/finance/gerenciar_despesas.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <h1>Gerenciar Despesas</h1>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for despesa in despesas %}
+
+                <tr>
+
+                    <td>{{ despesa.id }}</td>
+
+                    <td>{{ despesa.descricao }}</td>
+
+                    <td>
+                        R$ {{ "%.2f"|format(despesa.valor) }}
+                    </td>
+
+                    <td>
+                        {{ despesa.criado_em.strftime("%d/%m/%Y %H:%M") }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="/admin/despesa/{{ despesa.id }}/editar"
+                            class="btn-editar"
+                        >
+                            Editar
+                        </a>
+
+                        <a
+                            href="/admin/despesa/{{ despesa.id }}/excluir"
+                            class="btn-excluir"
+                            onclick="return confirm('Deseja realmente excluir esta despesa?')"
+                        >
+                            Excluir
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

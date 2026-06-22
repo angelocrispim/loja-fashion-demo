@@ -1,0 +1,78 @@
+.dashboard{
+
+    padding: 40px;
+
+}
+
+.dashboard h1{
+
+    margin-bottom: 30px;
+
+}
+
+.cards-grid{
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap: 25px;
+
+}
+
+.card-financeiro{
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.card-financeiro span{
+
+    color: #666;
+
+    display: block;
+
+    margin-bottom: 10px;
+
+}
+
+.card-financeiro h2{
+
+    color: #0f5c2e;
+
+    font-size: 32px;
+
+}
+
+.grafico-card{
+
+    margin-top: 40px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.grafico-card h2{
+
+    margin-bottom: 20px;
+
+}
+
+#graficoVendas{
+
+    max-height: 400px;
+
+}

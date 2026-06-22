@@ -1,0 +1,128 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Editar Funcionário
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/funcionarios.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <h1>
+        Editar Funcionário
+    </h1>
+
+    <form
+        action="/admin/editar-funcionario/{{ funcionario.id }}"
+        method="POST"
+        class="funcionario-form"
+    >
+
+        <input type="text"
+               name="nome"
+               value="{{ funcionario.nome }}">
+
+        <input type="text"
+               name="matricula"
+               value="{{ funcionario.matricula }}">
+
+        <input type="email"
+               name="email"
+               value="{{ funcionario.email }}">
+
+        <input type="text"
+               name="telefone"
+               value="{{ funcionario.telefone }}">
+
+        <input type="text"
+               id="cpf"
+               name="cpf"
+               value="{{ funcionario.cpf }}">
+
+        <select name="cargo">
+
+            <option value="Administrador"
+            {% if funcionario.cargo == "Administrador" %}selected{% endif %}>
+                Administrador
+            </option>
+
+            <option value="Gerente"
+            {% if funcionario.cargo == "Gerente" %}selected{% endif %}>
+                Gerente
+            </option>
+
+            <option value="Vendedor"
+            {% if funcionario.cargo == "Vendedor" %}selected{% endif %}>
+                Vendedor
+            </option>
+
+            <option value="Caixa"
+            {% if funcionario.cargo == "Caixa" %}selected{% endif %}>
+                Caixa
+            </option>
+
+            <option value="Estoquista"
+            {% if funcionario.cargo == "Estoquista" %}selected{% endif %}>
+                Estoquista
+            </option>
+
+        </select>
+
+        <input type="text"
+               id="salario"
+               name="salario"
+               value="{{ funcionario.salario }}">
+
+        <button type="submit">
+            Salvar Alterações
+        </button>
+
+    </form>
+
+</section>
+
+<script>
+
+    // CPF
+
+    const cpfInput = document.getElementById("cpf");
+
+    cpfInput.addEventListener("input", () => {
+
+        let value = cpfInput.value.replace(/\D/g, "");
+
+        value = value.replace(/^(\d{3})(\d)/, "$1.$2");
+
+        value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+
+        value = value.replace(/\.(\d{3})(\d)/, ".$1-$2");
+
+        cpfInput.value = value;
+
+    });
+
+
+    // SALÁRIO
+
+    const salarioInput = document.getElementById("salario");
+
+    salarioInput.addEventListener("input", () => {
+
+        let value = salarioInput.value.replace(/\D/g, "");
+
+        value = (Number(value) / 100).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2
+        });
+
+        salarioInput.value = value;
+
+    });
+
+</script>
+
+{% endblock %}

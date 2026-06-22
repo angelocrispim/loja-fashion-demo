@@ -1,0 +1,183 @@
+/* =========================
+PÁGINA
+========================= */
+
+.dashboard-page{
+padding: 40px;
+}
+
+.dashboard-page h1{
+font-size: 32px;
+color: #111;
+margin-bottom: 30px;
+}
+
+/* =========================
+CARDS
+========================= */
+
+.cards-grid{
+display: grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap: 20px;
+
+margin-bottom: 40px;
+
+
+}
+
+.card-dashboard{
+
+
+background: white;
+
+border-radius: 20px;
+
+padding: 25px;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.08);
+
+
+}
+
+.card-dashboard h3{
+
+
+color: #666;
+
+font-size: 16px;
+
+margin-bottom: 15px;
+
+
+}
+
+.card-dashboard span{
+
+
+font-size: 30px;
+
+font-weight: bold;
+
+color: #0f5c2e;
+
+
+}
+
+/* =========================
+TABELA
+========================= */
+
+.table-container{
+
+
+background: white;
+
+border-radius: 20px;
+
+overflow: hidden;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.08);
+
+
+}
+
+.table-container table{
+
+
+width: 100%;
+
+border-collapse: collapse;
+
+
+}
+
+.table-container thead{
+
+
+background: #111;
+
+color: white;
+
+
+}
+
+.table-container th{
+
+
+padding: 18px;
+
+text-align: left;
+
+font-size: 14px;
+
+
+}
+
+.table-container td{
+
+
+padding: 18px;
+
+border-bottom:
+1px solid #eee;
+
+
+}
+
+.table-container tbody tr:hover{
+
+
+background: #f8f8f8;
+
+
+}
+
+/* =========================
+CORES
+========================= */
+
+.entrada{
+
+
+color: #0f5c2e;
+
+font-weight: bold;
+
+
+}
+
+.saida{
+
+
+color: #d62828;
+
+font-weight: bold;
+
+
+}
+
+/* =========================
+RESPONSIVO
+========================= */
+
+@media(max-width:768px){
+
+
+.dashboard-page{
+
+    padding: 20px;
+}
+
+.table-container{
+
+    overflow-x: auto;
+}
+
+
+}

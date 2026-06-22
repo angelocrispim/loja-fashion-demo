@@ -1,0 +1,76 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Fechamentos de Caixa
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/fechamentos_caixa.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="fechamentos-page">
+
+    <div class="page-header">
+        <h1>Fechamentos de Caixa</h1>
+        <p>Histórico completo dos caixas fechados</p>
+    </div>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Operador</th>
+                    <th>Vendas</th>
+                    <th>Despesas</th>
+                    <th>Saldo Final</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for fechamento in fechamentos %}
+
+                <tr>
+
+                    <td>#{{ fechamento.id }}</td>
+
+                    <td>
+                        {{ fechamento.criado_em.strftime("%d/%m/%Y %H:%M") }}
+                    </td>
+
+                    <td>
+                        {{ fechamento.funcionario.nome }}
+                    </td>
+
+                    <td class="entrada">
+                        R$ {{ "%.2f"|format(fechamento.total_vendas) }}
+                    </td>
+
+                    <td class="saida">
+                        R$ {{ "%.2f"|format(fechamento.total_despesas) }}
+                    </td>
+
+                    <td class="saldo">
+                        R$ {{ "%.2f"|format(fechamento.saldo_final) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

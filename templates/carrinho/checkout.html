@@ -1,0 +1,503 @@
+{% extends "base.html" %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/carrinho/checkout.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<form action="/finalizar-compra" method="POST">
+
+<section class="checkout">
+
+    <div class="checkout-container">
+
+        <!-- ESQUERDA -->
+        <div class="checkout-left">
+
+            <h1>Finalizar Compra</h1>
+
+            <!-- ENDEREÇO -->
+            <div class="checkout-card">
+
+                <h2>Endereço de Entrega</h2>
+
+                <input
+                    type="text"
+                    name="nome"
+                    placeholder="Nome Completo"
+                    value="{{ usuario.nome }}"
+                >
+
+                <input
+                    type="text"
+                    id="cep"
+                    name="cep"
+                    value="{{ usuario.cep if usuario and usuario.cep else '' }}"
+                    placeholder="Digite o CEP da entrega"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="rua"
+                    name="rua"
+                    value="{{ usuario.rua if usuario and usuario.rua else '' }}"
+                    placeholder="Digite o endereço da entrega"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="numero"
+                    name="numero"
+                    value="{{ usuario.numero if usuario and usuario.numero else '' }}"
+                    placeholder="Número da residência"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="cidade"
+                    name="cidade"
+                    value="{{ usuario.cidade if usuario and usuario.cidade else '' }}"
+                    placeholder="Digite a cidade"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="estado"
+                    name="estado"
+                    value="{{ usuario.estado if usuario and usuario.estado else '' }}"
+                    placeholder="Digite o estado"
+                    required
+                >
+
+            </div>
+
+            <!-- FRETE -->
+            <div class="checkout-card">
+
+                <h2>Opções de Frete</h2>
+
+                <label class="pagamento-option">
+
+                    <input
+                        type="radio"
+                        name="frete"
+                        value="PAC"
+                        checked
+                    >
+
+                    <div>
+
+                        <h3>PAC</h3>
+
+                        <p>Entrega em até 10 dias úteis</p>
+
+                    </div>
+
+                </label>
+
+                <label class="pagamento-option">
+
+                    <input
+                        type="radio"
+                        name="frete"
+                        value="SEDEX"
+                    >
+
+                    <div>
+
+                        <h3>SEDEX</h3>
+
+                        <p>Entrega em até 3 dias úteis</p>
+
+                    </div>
+
+                </label>
+
+                <label class="pagamento-option">
+
+                    <input
+                        type="radio"
+                        name="frete"
+                        value="EXPRESSA"
+                    >
+
+                    <div>
+
+                        <h3>Entrega Expressa</h3>
+
+                        <p>Entrega em até 24 horas</p>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+            <!-- PAGAMENTO -->
+            <div class="checkout-card">
+                <!--Inicio Pagamentos-->
+                <h2>Forma de Pagamento</h2>
+
+                    <label class="pagamento-option">
+
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="PIX"
+                            checked
+                            onclick="mostrarPagamento('pix')"
+                        >
+
+                        <div>
+
+                            <h3>PIX</h3>
+
+                            <p>5% de desconto à vista</p>
+
+                        </div>
+
+                    </label>
+
+                    <label class="pagamento-option">
+
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="Cartão Crédito"
+                            onclick="mostrarPagamento('credito')"
+                        >
+
+                        <div>
+
+                            <h3>Cartão de Crédito</h3>
+
+                            <p>Até 12x sem juros</p>
+
+                        </div>
+
+                    </label>
+
+                    <label class="pagamento-option">
+
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="Cartão Débito"
+                            onclick="mostrarPagamento('debito')"
+                        >
+
+                        <div>
+
+                            <h3>Cartão de Débito</h3>
+
+                        </div>
+
+                    </label>
+
+                    <label class="pagamento-option">
+
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="Boleto"
+                            onclick="mostrarPagamento('boleto')"
+                        >
+
+                        <div>
+
+                            <h3>Boleto Bancário</h3>
+
+                        </div>
+
+                    </label>
+
+                    <!-- PIX -->
+                    <div id="pix-info" class="pagamento-detalhes ativo">
+
+                        <h3>📱 Pagamento via PIX</h3>
+
+                        <img
+                            src="{{ url_for('static', path='/imagens/pix_teste.png') }}"
+                            class="pix-qrcode"
+                            alt="QR Code PIX"
+                        >
+
+                        <p>
+
+                            Chave PIX:
+
+                            <strong>lojafashion@pix.com</strong>
+
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn-pix"
+                            onclick="copiarPix()"
+                        >
+
+                            Copiar Chave PIX
+
+                        </button>
+
+                    </div>
+
+                    <!-- CRÉDITO -->
+                    <div id="credito-info" class="pagamento-detalhes">
+
+                        <input
+                            type="text"
+                            name="credito_numero"
+                            placeholder="Número do cartão"
+                        >
+
+                        <input
+                            type="text"
+                            name="credito_nome"
+                            placeholder="Nome do titular"
+                        >
+
+                        <input
+                            type="text"
+                            name="credito_validade"
+                            placeholder="MM/AA"
+                        >
+
+                        <input
+                            type="text"
+                            name="credito_cvv"
+                            placeholder="CVV"
+                        >
+
+                        <select name="parcelas">
+
+                            {% for i in range(1,13) %}
+
+                            <option value="{{ i }}">
+
+                                {{ i }}x sem juros
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <!-- DÉBITO -->
+                    <div id="debito-info" class="pagamento-detalhes">
+
+                        <input
+                            type="text"
+                            name="debito_numero"
+                            placeholder="Número do cartão"
+                        >
+
+                        <input
+                            type="text"
+                            name="debito_nome"
+                            placeholder="Nome do titular"
+                        >
+
+                        <input
+                            type="text"
+                            name="debito_validade"
+                            placeholder="MM/AA"
+                        >
+
+                        <input
+                            type="text"
+                            name="debito_cvv"
+                            placeholder="CVV"
+                        >
+
+                    </div>
+
+                    <!-- BOLETO -->
+                    <div id="boleto-info" class="pagamento-detalhes">
+
+                        <div class="boleto-box">
+
+                            <h3>🧾 Boleto Bancário</h3>
+
+                            <p>
+                                O boleto será gerado após a finalização do pedido.
+                            </p>
+
+                            <p>
+                                Vencimento em até 3 dias úteis.
+                            </p>
+
+                        </div>
+
+                    </div>
+                    <!--Fim pagamento-->
+            </div>
+
+        </div>
+
+        <!-- DIREITA -->
+        <div class="checkout-right">
+
+            <div class="resumo-card">
+
+                <h2>Resumo do Pedido</h2>
+
+                {% for item in itens %}
+
+                <div class="resumo-item">
+
+                    <img
+                        src="{{ item.produto.imagem }}"
+                        alt="{{ item.produto.nome }}"
+                    >
+
+                    <div class="resumo-info">
+
+                        <h3>
+                            {{ item.produto.nome }}
+                        </h3>
+
+                        <p>
+                            Quantidade:
+                            {{ item.quantidade }}
+                        </p>
+
+                    </div>
+
+                    <span class="resumo-preco">
+
+                        R$ {{ item.produto.preco }}
+
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+                <div class="resumo-total">
+
+                    <h3>Total</h3>
+
+                    <span>
+                        R$ {{ total }}
+                    </span>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-finalizar"
+                >
+                    Finalizar Pedido
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+function mostrarPagamento(tipo){
+
+    document.querySelectorAll(
+        ".pagamento-detalhes"
+    ).forEach(div => {
+
+        div.classList.remove("ativo");
+
+    });
+
+    document.getElementById(
+        tipo + "-info"
+    ).classList.add("ativo");
+
+}
+
+function copiarPix(){
+
+    navigator.clipboard.writeText(
+        "lojafashion@pix.com"
+    );
+
+    alert("Chave PIX copiada!");
+
+}
+
+</script>
+
+<script>
+
+document.getElementById("cep").addEventListener("blur", async () => {
+
+    const cep = document
+        .getElementById("cep")
+        .value
+        .replace(/\D/g, "");
+
+    if(cep.length !== 8){
+
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(
+
+            `https://viacep.com.br/ws/${cep}/json/`
+
+        );
+
+        const dados = await response.json();
+
+        if(dados.erro){
+
+            alert("CEP não encontrado.");
+
+            return;
+
+        }
+
+        document.getElementById("rua").value =
+            dados.logradouro || "";
+
+        document.getElementById("cidade").value =
+            dados.localidade || "";
+
+        document.getElementById("estado").value =
+            dados.uf || "";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Erro ao consultar o CEP.");
+
+    }
+
+});
+
+</script>
+
+</form>
+
+{% endblock %}
+

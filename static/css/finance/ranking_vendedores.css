@@ -1,0 +1,80 @@
+.ranking-page{
+    padding: 30px;
+}
+
+.page-header{
+    margin-bottom: 30px;
+}
+
+.page-header h1{
+    font-size: 34px;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.page-header p{
+    color: #666;
+    font-size: 16px;
+}
+
+.table-card{
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead{
+    background: #111;
+    color: white;
+}
+
+th{
+    padding: 18px;
+    text-align: left;
+    font-size: 15px;
+}
+
+td{
+    padding: 18px;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover{
+    background: #f8f8f8;
+}
+
+.posicao{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.faturamento{
+    color: #0f5c2e;
+    font-weight: bold;
+}
+
+.vendas{
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.primeiro{
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.segundo{
+    color: #9ca3af;
+    font-weight: bold;
+}
+
+.terceiro{
+    color: #b45309;
+    font-weight: bold;
+}

@@ -1,0 +1,101 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Relatório de Lucro
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/relatorio_lucro.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="lucro-page">
+
+    <div class="page-header">
+
+        <h1>
+            Relatório de Lucro
+        </h1>
+
+        <p>
+            Acompanhe os resultados financeiros da loja
+        </p>
+
+    </div>
+
+    <div class="cards-grid">
+
+        <div class="card receita">
+
+            <h3>
+                Receita Total
+            </h3>
+
+            <span>
+
+                R$ {{ "%.2f"|format(total_vendas) }}
+
+            </span>
+
+        </div>
+
+        <div class="card despesa">
+
+            <h3>
+                Despesas Totais
+            </h3>
+
+            <span>
+
+                R$ {{ "%.2f"|format(total_despesas) }}
+
+            </span>
+
+        </div>
+
+        <div class="card lucro">
+
+            <h3>
+                Lucro Líquido
+            </h3>
+
+            <span>
+
+                R$ {{ "%.2f"|format(lucro) }}
+
+            </span>
+
+        </div>
+
+        <div class="card margem">
+
+            <h3>
+                Margem de Lucro
+            </h3>
+
+            <span>
+
+                {{ "%.2f"|format(margem) }}%
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="acoes">
+
+        <a href="/admin/relatorio-lucro/pdf"
+        class="btn-pdf">
+
+            Exportar PDF
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

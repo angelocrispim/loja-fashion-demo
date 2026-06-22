@@ -1,0 +1,222 @@
+/* =========================================
+   CARRINHO
+========================================= */
+
+.carrinho-page{
+    min-height: 100vh;
+    padding: 140px 8% 80px;
+    background: #f7f7f7;
+}
+
+.carrinho-title{
+    font-size: 45px;
+    color: #111;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.carrinho-container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+/* =========================================
+   PRODUTOS
+========================================= */
+
+.carrinho-produtos{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.carrinho-card{
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+
+    display: flex;
+    gap: 25px;
+
+    padding: 20px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.carrinho-img{
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.carrinho-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carrinho-info{
+    flex: 1;
+}
+
+.carrinho-info h2{
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.carrinho-info p{
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.carrinho-preco{
+    font-size: 30px;
+    color: #0f5c2e;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* =========================================
+   QUANTIDADE
+========================================= */
+
+.quantidade-box{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quantidade-btn{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+    border: none;
+
+    background: #111;
+    color: white;
+
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.quantidade-btn:hover{
+    background: #0f5c2e;
+}
+
+.quantidade-numero{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =========================================
+   REMOVER
+========================================= */
+
+.btn-remover{
+    display: inline-block;
+    margin-top: 20px;
+
+    color: #d62828;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* =========================================
+   RESUMO
+========================================= */
+
+.carrinho-resumo{
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    height: fit-content;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.carrinho-resumo h2{
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.resumo-item{
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+    font-size: 18px;
+}
+
+.total{
+    font-size: 28px;
+    font-weight: bold;
+    color: #0f5c2e;
+
+    margin: 30px 0;
+}
+
+.btn-finalizar{
+    width: 100%;
+    display: inline-block;
+
+    text-align: center;
+
+    background: #0f5c2e;
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.btn-finalizar:hover{
+    background: #157347;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media(max-width: 992px){
+
+    .carrinho-container{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .carrinho-card{
+        flex-direction: column;
+    }
+
+    .carrinho-img{
+        width: 100%;
+        height: 280px;
+    }
+
+    .carrinho-title{
+        font-size: 35px;
+    }
+
+}

@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Caixa PDV</title>
+
+    <link rel="stylesheet" href="/static/css/admin/caixa.css">
+</head>
+<body>
+
+<div class="caixa-container">
+
+    <!-- ESQUERDA -->
+    <div class="caixa-left">
+
+        <div class="topo-caixa">
+            <h1>CAIXA PDV</h1>
+
+            <div class="caixa-info">
+                <span>Operador:</span>
+                <strong>{{ usuario.nome }}</strong>
+            </div>
+        </div>
+
+        <!-- SCANNER -->
+        <div class="scanner-box">
+
+            <label>Código do Produto</label>
+
+            <input
+                type="text"
+                id="codigo_produto"
+                placeholder="Bipar código..."
+                autofocus
+            >
+
+        </div>
+
+        <!-- TABELA -->
+        <div class="produtos-area">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>PRODUTO</th>
+                        <th>QTD</th>
+                        <th>VALOR</th>
+                        <th>TOTAL</th>
+                        <th>AÇÃO</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabela_produtos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- DIREITA -->
+    <div class="caixa-right">
+
+        <div class="total-box">
+
+            <span>TOTAL</span>
+
+            <h2 id="valor_total">
+                R$ 0,00
+            </h2>
+
+        </div>
+
+        <!-- DESCONTO -->
+        <div class="form-group">
+
+            <label>Desconto</label>
+
+            <input
+                type="number"
+                id="desconto"
+                placeholder="0.00"
+                value="0"
+            >
+
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="form-group">
+
+            <label>Forma de Pagamento</label>
+
+            <select id="forma_pagamento">
+
+                <option>Dinheiro</option>
+                <option>Pix</option>
+                <option>Cartão Crédito</option>
+                <option>Cartão Débito</option>
+
+            </select>
+
+        </div>
+
+        <!-- VALOR FINAL -->
+        <div class="valor-final">
+
+            <span>Valor Final</span>
+
+            <h3 id="valor_final">
+                R$ 0,00
+            </h3>
+
+        </div>
+
+        <!-- BOTÕES -->
+        <div class="botoes-caixa">
+
+            <button
+                type="button"
+                class="btn-finalizar"
+                onclick="abrirModalPagamento()"
+            >
+                FINALIZAR VENDA
+            </button>
+
+            <!--<button
+                class="btn-finalizar"
+                onclick="abrirModalPix()"
+            >
+                TESTAR PIX
+            </button>-->
+
+            <button class="btn-cancelar">
+                CANCELAR
+            </button>
+
+            <button
+                class="btn-fechar-caixa"
+                onclick="fecharCaixa()"
+            >
+                FECHAR CAIXA
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL PAGAMENTO -->
+
+<div id="modalPagamento" class="modal-pagamento">
+
+    <div class="modal-content">
+
+        <h2>Finalizar Venda</h2>
+
+        <div class="total-modal">
+
+            Total:
+            <strong id="totalModal">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+        <div class="formas">
+
+            <label>
+                <input
+                    type="radio"
+                    name="pagamento_modal"
+                    value="Dinheiro"
+                    checked
+                >
+                Dinheiro
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="pagamento_modal"
+                    value="Pix"
+                >
+                PIX
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="pagamento_modal"
+                    value="Cartão Crédito"
+                >
+                Cartão Crédito
+            </label>
+
+            <label>
+                <input
+                    type="radio"
+                    name="pagamento_modal"
+                    value="Cartão Débito"
+                >
+                Cartão Débito
+            </label>
+
+        </div>
+
+        <div id="areaDinheiro">
+
+            <label>Valor Recebido</label>
+
+            <input
+                type="number"
+                id="valorRecebido"
+                step="0.01"
+                placeholder="0.00"
+            >
+
+            <div class="troco-box">
+
+                Troco:
+                <strong id="troco">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!--Parcelas-->
+
+        <div
+            id="areaParcelamento"
+            style="display:none;"
+        >
+
+            <label>
+                Parcelamento
+            </label>
+
+            <select id="parcelas">
+
+                <option value="1">
+                    1x sem juros
+                </option>
+
+                <option value="2">
+                    2x sem juros
+                </option>
+
+                <option value="3">
+                    3x sem juros
+                </option>
+
+                <option value="4">
+                    4x sem juros
+                </option>
+
+                <option value="5">
+                    5x sem juros
+                </option>
+
+                <option value="6">
+                    6x sem juros
+                </option>
+
+                <option value="12">
+                    12x sem juros
+                </option>
+
+            </select>
+
+            <div
+                id="valorParcela"
+                class="troco-box"
+            >
+
+                Valor da Parcela
+
+                <strong>
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!--Fim Parcelas-->
+
+        <div class="acoes-modal">
+
+            <button
+                class="btn-confirmar"
+                onclick="confirmarVenda()"
+            >
+                Confirmar Venda
+            </button>
+
+            <button
+                class="btn-cancelar-modal"
+                onclick="fecharModalPagamento()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL PIX -->
+
+<div id="modalPix" class="modal-pagamento">
+
+    <div class="modal-content">
+
+        <h2>
+            Pagamento PIX
+        </h2>
+
+        <div class="valor-pix">
+
+            Valor da Venda
+
+            <strong id="valorPix">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+        <img
+            src="/static/imagens/pix_teste.png"
+            class="qrcode-pix"
+            alt="PIX"
+        >
+
+        <p class="chave-pix">
+
+            Chave PIX
+
+            <strong>
+                pix@lojafashion.com
+            </strong>
+
+        </p>
+
+        <button
+            class="btn-confirmar"
+            onclick="confirmarPix()"
+        >
+            ✅ Pagamento Recebido
+        </button>
+
+        <button
+            class="btn-cancelar-modal"
+            onclick="fecharModalPix()"
+        >
+            Cancelar
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let produtos = []
+
+let vendaPixId = null
+
+const inputCodigo =
+document.getElementById("codigo_produto")
+
+
+// ========================================
+// BIPAR PRODUTO
+// ========================================
+
+inputCodigo.addEventListener(
+    "keydown",
+    async function(e){
+
+        if(e.key === "Enter"){
+
+            const codigo = inputCodigo.value.trim()
+
+            if(!codigo) return
+
+            try{
+
+                const response =
+                await fetch(
+                    `/produto/codigo/${codigo}`
+                )
+
+                if(!response.ok){
+
+                    alert("Produto não encontrado")
+
+                    inputCodigo.value = ""
+
+                    return
+                }
+
+                const produto =
+                await response.json()
+
+                adicionarProduto(produto)
+
+                tocarBeep()
+
+                inputCodigo.value = ""
+
+            }catch(error){
+
+                console.log(error)
+
+            }
+
+        }
+
+    }
+)
+
+
+// ========================================
+// ADICIONAR PRODUTO
+// ========================================
+
+function adicionarProduto(produto){
+
+    const existente =
+    produtos.find(
+        p => p.id === produto.id
+    )
+
+    if(existente){
+
+        existente.quantidade += 1
+
+    }else{
+
+        produtos.push({
+            ...produto,
+            quantidade: 1
+        })
+
+    }
+
+    renderizarProdutos()
+
+}
+
+
+// ========================================
+// RENDERIZAR TABELA
+// ========================================
+
+function renderizarProdutos(){
+
+    const tabela =
+    document.getElementById(
+        "tabela_produtos"
+    )
+
+    tabela.innerHTML = ""
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        const subtotal =
+        produto.preco * produto.quantidade
+
+        total += subtotal
+
+        tabela.innerHTML += `
+            <tr>
+
+                <td>
+                    ${produto.codigo}
+                </td>
+
+                <td>
+                    ${produto.nome}
+                </td>
+
+                <td>
+
+                    <button
+                        onclick="diminuirQtd(${produto.id})"
+                        class="btn-qtd"
+                    >
+                        -
+                    </button>
+
+                    ${produto.quantidade}
+
+                    <button
+                        onclick="aumentarQtd(${produto.id})"
+                        class="btn-qtd"
+                    >
+                        +
+                    </button>
+
+                </td>
+
+                <td>
+                    R$ ${produto.preco.toFixed(2)}
+                </td>
+
+                <td>
+                    R$ ${subtotal.toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        onclick="removerProduto(${produto.id})"
+                        class="btn-remover"
+                    >
+                        X
+                    </button>
+
+                </td>
+
+            </tr>
+        `
+
+    })
+
+    document.getElementById(
+        "valor_total"
+    ).innerHTML =
+    `R$ ${total.toFixed(2)}`
+
+    atualizarValorFinal()
+
+}
+
+
+// ========================================
+// VALOR FINAL
+// ========================================
+
+document.getElementById("desconto")
+.addEventListener(
+    "input",
+    atualizarValorFinal
+)
+
+function atualizarValorFinal(){
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        total +=
+        produto.preco * produto.quantidade
+
+    })
+
+    const desconto =
+    parseFloat(
+        document.getElementById(
+            "desconto"
+        ).value
+    ) || 0
+
+    const final = total - desconto
+
+    document.getElementById(
+        "valor_final"
+    ).innerHTML =
+    `R$ ${final.toFixed(2)}`
+
+}
+
+
+// ========================================
+// SOM BEEP
+// ========================================
+
+function tocarBeep(){
+
+    const audio = new Audio(
+        "/static/audio/beep.mp3"
+    )
+
+    audio.play()
+
+}
+
+
+// ========================================
+// FULLSCREEN
+// ========================================
+
+window.onload = () => {
+
+    document.documentElement
+    .requestFullscreen()
+
+}
+
+</script>
+
+<script>
+
+// ENTRAR EM TELA CHEIA AUTOMATICAMENTE
+
+window.onload = () => {
+
+    document.documentElement.requestFullscreen()
+
+}
+
+// SAIR COM ESC
+// o navegador já faz automaticamente,
+// mas esse código monitora o estado
+
+document.addEventListener("fullscreenchange", () => {
+
+    if (!document.fullscreenElement) {
+
+        console.log("Saiu da tela cheia")
+
+    }
+
+})
+
+document.addEventListener(
+    "input",
+    function(e){
+
+        if(
+            e.target.id ===
+            "valorRecebido"
+        ){
+
+            let total = 0
+
+            produtos.forEach(produto => {
+
+                total +=
+                produto.preco *
+                produto.quantidade
+
+            })
+
+            const desconto =
+            parseFloat(
+                document.getElementById(
+                    "desconto"
+                ).value
+            ) || 0
+
+            total -= desconto
+
+            const recebido =
+            parseFloat(
+                e.target.value
+            ) || 0
+
+            const troco =
+            recebido - total
+
+            document.getElementById(
+                "troco"
+            ).innerHTML =
+            "R$ " +
+            Math.max(
+                troco,
+                0
+            ).toFixed(2)
+
+        }
+
+    }
+)
+
+</script>
+
+<script>
+// ========================================
+// AUMENTAR QUANTIDADE
+// ========================================
+
+function aumentarQtd(id){
+
+    const produto = produtos.find(
+        p => p.id === id
+    )
+
+    if(produto){
+
+        produto.quantidade += 1
+
+        renderizarProdutos()
+
+    }
+
+}
+
+
+// ========================================
+// DIMINUIR QUANTIDADE
+// ========================================
+
+function diminuirQtd(id){
+
+    const produto = produtos.find(
+        p => p.id === id
+    )
+
+    if(produto){
+
+        produto.quantidade -= 1
+
+        if(produto.quantidade <= 0){
+
+            produtos = produtos.filter(
+                p => p.id !== id
+            )
+
+        }
+
+        renderizarProdutos()
+
+    }
+
+}
+
+
+// ========================================
+// REMOVER PRODUTO
+// ========================================
+
+function removerProduto(id){
+
+    produtos = produtos.filter(
+        p => p.id !== id
+    )
+
+    renderizarProdutos()
+
+}
+
+function abrirModalPagamento(){
+
+    alert("ABRINDO MODAL")
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        total +=
+        produto.preco *
+        produto.quantidade
+
+    })
+
+    const desconto =
+    parseFloat(
+        document.getElementById(
+            "desconto"
+        ).value
+    ) || 0
+
+    total -= desconto
+
+    document.getElementById(
+        "totalModal"
+    ).innerHTML =
+    "R$ " + total.toFixed(2)
+
+    document.getElementById(
+        "modalPagamento"
+    ).style.display = "flex"
+
+    atualizarFormaPagamento()
+    calcularParcelas()
+
+}
+
+function fecharModalPagamento(){
+
+    document.getElementById(
+        "modalPagamento"
+    ).style.display = "none"
+
+}
+
+console.log("SCRIPT CARREGOU")
+
+// ========================================
+// FINALIZAR VENDA
+// ========================================
+async function confirmarVenda(){
+
+    console.log("BOTÃO CLICADO")
+
+    if(produtos.length === 0){
+
+        alert("Nenhum produto adicionado")
+        return
+
+    }
+
+    const desconto =
+    parseFloat(
+        document.getElementById(
+            "desconto"
+        ).value
+    ) || 0
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        total +=
+        produto.preco *
+        produto.quantidade
+
+    })
+
+    const pagamento =
+    document.querySelector(
+        'input[name="pagamento_modal"]:checked'
+    ).value
+//inicio ajeita
+    try{
+
+        let parcelas = 1
+
+        let valorParcela =
+        total - desconto
+
+        if(
+            pagamento ===
+            "Cartão Crédito"
+        ){
+
+            parcelas =
+            parseInt(
+                document.getElementById(
+                    "parcelas"
+                ).value
+            )
+
+            valorParcela =
+            parseFloat(
+                document.querySelector(
+                    "#valorParcela strong"
+                ).innerText
+                .replace("R$","")
+                .replace(",",".")
+            )
+
+        }
+
+        const response =
+        await fetch(
+            "/caixa/finalizar-venda",
+            {
+                method: "POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body: JSON.stringify({
+
+                    funcionario_id:
+                    {{ usuario.id }},
+
+                    pagamento:
+                    pagamento,
+
+                    desconto:
+                    desconto,
+
+                    total:
+                    total - desconto,
+                    
+                    parcelas:
+                    parcelas,
+
+                    valor_parcela:
+                    valorParcela,
+
+                    produtos:
+                    produtos
+
+                })
+            }
+        )
+        //fim ajeita********************************************************************************
+        console.log(
+            "STATUS:",
+            response.status
+        )
+
+        if(!response.ok){
+
+            alert(
+                "Erro ao finalizar venda"
+            )
+
+            return
+
+        }
+
+        const resultado =
+        await response.json()
+
+        console.log(resultado)
+
+    if(resultado.success){
+
+            if(pagamento === "Pix"){
+
+            vendaPixId = resultado.venda_id
+
+            abrirModalPix()
+
+            fecharModalPagamento()
+
+            return
+
+        }
+
+        // abre cupom
+
+        window.open(
+            "/caixa/venda/" +
+            resultado.venda_id,
+            "_blank",
+            "width=900,height=800"
+        )
+
+        // fecha modal
+
+        fecharModalPagamento()
+
+        // limpa carrinho
+
+        produtos = []
+
+        renderizarProdutos()
+
+        // limpa desconto
+
+        document.getElementById(
+            "desconto"
+        ).value = 0
+
+        atualizarValorFinal()
+
+        // limpa valor recebido
+
+        const valorRecebido =
+        document.getElementById(
+            "valorRecebido"
+        )
+
+        if(valorRecebido){
+
+            valorRecebido.value = ""
+
+        }
+
+        // volta foco para leitor
+
+        document.getElementById(
+            "codigo_produto"
+        ).focus()
+
+    }
+
+    }catch(error){
+
+        console.log(error)
+
+        alert(
+            "Erro na comunicação com o servidor"
+        )
+
+    }
+
+}
+
+
+</script>
+
+<script>
+
+async function fecharCaixa(){
+
+    const response =
+    await fetch(
+        "/caixa/fechar",
+        {
+            method:"POST"
+        }
+    )
+
+    const dados =
+    await response.json()
+
+    alert(
+
+        "CAIXA FECHADO\n\n" +
+
+        "Vendas: R$ " +
+        dados.vendas.toFixed(2) +
+
+        "\nDespesas: R$ " +
+        dados.despesas.toFixed(2) +
+
+        "\nSaldo: R$ " +
+        dados.saldo.toFixed(2)
+
+    )
+
+}
+
+</script>
+
+<script>
+    // ========================================
+    // PARCELAS
+    // ========================================
+    function atualizarFormaPagamento(){
+
+    const pagamento =
+    document.querySelector(
+        'input[name="pagamento_modal"]:checked'
+    ).value
+
+    // DINHEIRO
+
+    document.getElementById(
+        "areaDinheiro"
+    ).style.display =
+    pagamento === "Dinheiro"
+    ? "block"
+    : "none"
+
+    // CRÉDITO
+
+    document.getElementById(
+        "areaParcelamento"
+    ).style.display =
+    pagamento === "Cartão Crédito"
+    ? "block"
+    : "none"
+
+}
+
+document
+.querySelectorAll(
+    'input[name="pagamento_modal"]'
+)
+.forEach(radio => {
+
+    radio.addEventListener(
+        "change",
+        atualizarFormaPagamento
+    )
+
+})
+
+function calcularParcelas(){
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        total +=
+        produto.preco *
+        produto.quantidade
+
+    })
+
+    const desconto =
+    parseFloat(
+        document.getElementById(
+            "desconto"
+        ).value
+    ) || 0
+
+    total -= desconto
+
+    const parcelas =
+    parseInt(
+        document.getElementById(
+            "parcelas"
+        ).value
+    )
+
+    const valorParcela =
+    total / parcelas
+
+    document.querySelector(
+        "#valorParcela strong"
+    ).innerHTML =
+
+    "R$ " +
+    valorParcela.toFixed(2)
+
+}
+
+document.getElementById(
+    "parcelas"
+).addEventListener(
+    "change",
+    calcularParcelas
+)
+</script>
+
+<script>
+
+// ========================================
+// ABRIR MODAL
+// ========================================    
+
+function abrirModalPix(){
+
+    let total = 0
+
+    produtos.forEach(produto => {
+
+        total +=
+        produto.preco *
+        produto.quantidade
+
+    })
+
+    const desconto =
+    parseFloat(
+        document.getElementById(
+            "desconto"
+        ).value
+    ) || 0
+
+    total -= desconto
+
+    document.getElementById(
+        "valorPix"
+    ).innerHTML =
+    "R$ " + total.toFixed(2)
+
+    document.getElementById(
+        "modalPix"
+    ).style.display = "flex"
+
+}
+
+function fecharModalPix(){
+
+    document.getElementById(
+        "modalPix"
+    ).style.display = "none"
+
+}
+
+function confirmarPix(){
+
+    fecharModalPix()
+
+    // abre cupom
+
+    window.open(
+        "/caixa/venda/" +
+        vendaPixId,
+        "_blank",
+        "width=900,height=800"
+    )
+
+    // limpa carrinho
+
+    produtos = []
+
+    renderizarProdutos()
+
+    // limpa desconto
+
+    document.getElementById(
+        "desconto"
+    ).value = 0
+
+    atualizarValorFinal()
+
+    // limpa valor recebido
+
+    const valorRecebido =
+    document.getElementById(
+        "valorRecebido"
+    )
+
+    if(valorRecebido){
+
+        valorRecebido.value = ""
+
+    }
+
+    // volta foco para leitor
+
+    document.getElementById(
+        "codigo_produto"
+    ).focus()
+
+    vendaPixId = null
+
+}
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Escape"
+        ){
+
+            fecharModalPix()
+
+        }
+
+    }
+)
+
+</script>
+
+<script>
+
+// ========================================
+// ESCOLHA DE PAGAMENTO
+// ======================================== 
+
+    const formaPagamento =
+document.getElementById(
+    "forma_pagamento"
+)
+
+formaPagamento.addEventListener(
+    "change",
+    function(){
+
+        const areaParcelamento =
+        document.getElementById(
+            "areaParcelamento"
+        )
+
+        if(
+            this.value ===
+            "Cartão Crédito"
+        ){
+
+            areaParcelamento.style.display =
+            "block"
+
+        }else{
+
+            areaParcelamento.style.display =
+            "none"
+
+            document.getElementById(
+                "parcelas"
+            ).value = 1
+
+        }
+
+    }
+)
+</script>
+
+</body>
+</html>

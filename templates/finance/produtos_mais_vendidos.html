@@ -1,0 +1,76 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Produtos Mais Vendidos
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/produtos_mais_vendidos.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="relatorio-page">
+
+    <div class="page-header">
+
+        <h1>
+            Produtos Mais Vendidos
+        </h1>
+
+        <p>
+            Ranking dos produtos com maior saída
+        </p>
+
+    </div>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Posição</th>
+
+                    <th>Produto</th>
+
+                    <th>Quantidade Vendida</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for produto in produtos %}
+
+                <tr>
+
+                    <td>
+                        {{ loop.index }}
+                    </td>
+
+                    <td>
+                        {{ produto.nome }}
+                    </td>
+
+                    <td>
+                        {{ produto.total_vendido }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+.admin-page{
+
+    padding: 40px;
+
+}
+
+.admin-page h1{
+
+    font-size: 32px;
+
+    margin-bottom: 30px;
+
+    color: #222;
+
+}
+
+
+/* =========================
+   TABELA
+========================= */
+
+.vendas-table{
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.vendas-table thead{
+
+    background: #111;
+
+    color: white;
+
+}
+
+.vendas-table th{
+
+    padding: 18px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    letter-spacing: .5px;
+
+}
+
+.vendas-table td{
+
+    padding: 18px;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+.vendas-table tbody tr{
+
+    transition: .3s;
+
+}
+
+.vendas-table tbody tr:hover{
+
+    background: #f8f8f8;
+
+}
+
+.venda-id{
+
+    font-weight: bold;
+
+    color: #0f5c2e;
+
+}
+
+.total-venda{
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: #0f5c2e;
+
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.btn-visualizar{
+
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    background: #111;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition: .3s;
+
+    font-size: 14px;
+
+}
+
+.btn-visualizar:hover{
+
+    background: #0f5c2e;
+
+}

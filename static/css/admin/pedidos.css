@@ -1,0 +1,70 @@
+.pedidos{
+    padding: 40px;
+}
+
+.page-header{
+    margin-bottom: 30px;
+}
+
+.page-header h1{
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.page-header p{
+    color: #666;
+    font-size: 16px;
+}
+
+.pedidos-table{
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead{
+    background: #111;
+}
+
+thead th{
+    color: white;
+    padding: 18px;
+    text-align: left;
+    font-size: 15px;
+}
+
+tbody tr{
+    border-bottom: 1px solid #eee;
+    transition: .3s;
+}
+
+tbody tr:hover{
+    background: #f8f8f8;
+}
+
+tbody td{
+    padding: 18px;
+    color: #333;
+    font-size: 15px;
+}
+
+.valor{
+    font-weight: bold;
+    color: #0f5c2e;
+}
+
+.status{
+    background: #0f5c2e;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+}

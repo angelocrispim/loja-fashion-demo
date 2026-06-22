@@ -1,0 +1,114 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Relatório de Vendas
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/relatorio_vendas.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="finance-dashboard">
+
+    <h1>Relatório de Vendas</h1>
+
+    <div class="cards-grid">
+
+        <div class="card-finance">
+
+            <h3>Vendas Hoje</h3>
+
+            <span>
+                R$ {{ "%.2f"|format(vendas_hoje) }}
+            </span>
+
+        </div>
+
+        <div class="card-finance">
+
+            <h3>Vendas do Mês</h3>
+
+            <span>
+                R$ {{ "%.2f"|format(vendas_mes) }}
+            </span>
+
+        </div>
+
+        <div class="card-finance">
+
+            <h3>Quantidade</h3>
+
+            <span>
+                {{ quantidade_vendas }}
+            </span>
+
+        </div>
+
+        <div class="card-finance">
+
+            <h3>Ticket Médio</h3>
+
+            <span>
+                R$ {{ "%.2f"|format(ticket_medio) }}
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="grafico-card">
+
+        <h2>
+            Evolução das Vendas
+        </h2>
+
+        <canvas id="graficoVendas"></canvas>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx =
+document.getElementById(
+    'graficoVendas'
+)
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels:
+        {{ labels | tojson }},
+
+        datasets: [{
+
+            label:
+            'Vendas',
+
+            data:
+            {{ valores | tojson }},
+
+            borderWidth: 3,
+
+            tension: 0.3
+
+        }]
+
+    }
+
+})
+
+</script>
+
+{% endblock %}

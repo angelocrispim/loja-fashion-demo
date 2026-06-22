@@ -1,0 +1,112 @@
+.detalhe-pedido{
+    padding: 40px;
+}
+
+.pedido-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.pedido-topo h1{
+    font-size: 35px;
+}
+
+.status{
+    background: #0f5c2e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.pedido-info{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.info-card{
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.info-card h3{
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.total{
+    color: #0f5c2e;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.itens-pedido h2{
+    margin-bottom: 30px;
+}
+
+.item-card{
+    background: white;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.item-card img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.item-info h3{
+    margin-bottom: 10px;
+}
+
+.item-info p{
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.status-form{
+
+    margin-top: 20px;
+
+}
+
+.status-form select{
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ddd;
+
+}
+
+.status-form button{
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    background: #111;
+
+    color: white;
+
+    margin-left: 10px;
+
+}

@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ produto.nome }}
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/produtos/produto.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="produto-page">
+
+    <div class="produto-wrapper">
+
+        <!-- GALERIA -->
+        <div class="produto-galeria">
+
+            <div class="imagem-principal">
+
+                <img id="imagemPrincipal"
+                     src="{{ produto.imagem }}"
+                     alt="{{ produto.nome }}">
+
+            </div>
+
+            <div class="miniaturas">
+
+                <!-- IMAGEM PRINCIPAL -->
+
+                <img src="{{ produto.imagem }}"
+                     onclick="trocarImagem(this)"
+                     class="miniatura ativa">
+
+                <!-- GALERIA -->
+
+                {% for imagem in imagens %}
+
+                <img src="{{ imagem.imagem }}"
+                     onclick="trocarImagem(this)"
+                     class="miniatura">
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="produto-info">
+
+            <span class="categoria">
+                {{ produto.categoria }}
+            </span>
+
+            <h1>
+                {{ produto.nome }}
+            </h1>
+
+            <div class="produto-preco">
+                R$ {{ produto.preco }}
+            </div>
+
+            <p class="produto-descricao">
+                {{ produto.descricao }}
+            </p>
+
+            <div class="produto-estoque">
+
+                Estoque disponível:
+                <strong>{{ produto.estoque }}</strong>
+
+            </div>
+
+            <div class="produto-botoes">
+
+                
+                <a href="/comprar-agora/{{ produto.id }}"
+                class="btn-comprar">
+
+                    Comprar Agora
+
+                </a>
+
+
+
+                <a href="/adicionar-carrinho/{{ produto.id }}"
+                class="btn-carrinho">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Adicionar ao Carrinho
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRODUTOS RELACIONADOS -->
+
+<section class="relacionados">
+
+    <h2>
+        Produtos Relacionados
+    </h2>
+
+    <div class="relacionados-grid">
+
+        {% for item in produtos_relacionados %}
+
+        <a href="/produto/{{ item.id }}"
+           class="relacionado-card">
+
+            <img src="{{ item.imagem }}"
+                 alt="{{ item.nome }}">
+
+            <div class="relacionado-info">
+
+                <h3>
+                    {{ item.nome }}
+                </h3>
+
+                <span>
+                    R$ {{ item.preco }}
+                </span>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<script>
+
+function trocarImagem(elemento){
+
+    document.getElementById("imagemPrincipal").src =
+        elemento.src
+
+    let miniaturas = document.querySelectorAll(".miniatura")
+
+    miniaturas.forEach(img => {
+        img.classList.remove("ativa")
+    })
+
+    elemento.classList.add("ativa")
+
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Fluxo de Caixa
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="/static/css/finance/fluxo_caixa.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+
+<h1>
+    Fluxo de Caixa
+</h1>
+
+<div class="cards-grid">
+
+    <div class="card-dashboard">
+
+        <h3>Entradas</h3>
+
+        <span>
+            R$ {{ "%.2f"|format(entradas) }}
+        </span>
+
+    </div>
+
+    <div class="card-dashboard">
+
+        <h3>Saídas</h3>
+
+        <span>
+            R$ {{ "%.2f"|format(saidas) }}
+        </span>
+
+    </div>
+
+    <div class="card-dashboard">
+
+        <h3>Saldo Atual</h3>
+
+        <span>
+            R$ {{ "%.2f"|format(saldo) }}
+        </span>
+
+    </div>
+
+</div>
+
+<div class="table-container">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for mov in movimentacoes %}
+
+            <tr>
+
+                <td>
+                    {{ mov.data.strftime('%d/%m/%Y %H:%M') }}
+                </td>
+
+                <td>
+
+                {% if mov.tipo == "Entrada" %}
+
+                <span class="entrada">
+                    {{ mov.tipo }}
+                </span>
+
+                {% else %}
+
+                <span class="saida">
+                    {{ mov.tipo }}
+                </span>
+
+                {% endif %}
+
+                </td>
+
+                <td>
+                    {{ mov.categoria }}
+                </td>
+
+                <td>
+                    {{ mov.descricao }}
+                </td>
+
+                <td>
+
+                    R$ {{ "%.2f"|format(mov.valor) }}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,508 @@
+body{
+
+    margin: 0;
+
+    background: linear-gradient(
+        135deg,
+        #f4f6f9,
+        #e9edf3
+    );
+
+    font-family: "Segoe UI", sans-serif;
+
+}
+
+.pagamento-page{
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+}
+
+.pagamento-container{
+
+    width: 100%;
+    max-width: 750px;
+
+    background: #fff;
+
+    border-radius: 25px;
+
+    padding: 40px;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.15);
+
+}
+
+.titulo{
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.titulo h1{
+
+    margin: 0;
+
+    color: #111;
+
+    font-size: 40px;
+
+}
+
+.venda-id{
+
+    color: #777;
+
+    margin-top: 10px;
+}
+
+.total-box{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f5c2e,
+        #178848
+    );
+
+    color: white;
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+}
+
+.total-box span{
+
+    display: block;
+
+    font-size: 18px;
+
+    opacity: .9;
+
+}
+
+.total-box h2{
+
+    margin: 10px 0 0;
+
+    font-size: 60px;
+
+}
+
+.subtitulo{
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+    color: #111;
+
+}
+
+.formas{
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+}
+
+.forma-card{
+
+    border: 2px solid #ddd;
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    font-weight: bold;
+
+}
+
+.forma-card:hover{
+
+    border-color: #0f5c2e;
+
+    transform: translateY(-3px);
+
+}
+
+.forma-card input{
+
+    margin-right: 8px;
+
+}
+
+.form-group{
+
+    margin-bottom: 20px;
+
+}
+
+.form-group label{
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+}
+
+.form-group input,
+.form-group select{
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+}
+
+.troco-box{
+
+    margin-top: 15px;
+
+    background: #e9fff0;
+
+    border: 2px solid #0f5c2e;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+}
+
+.troco-box span{
+
+    display: block;
+
+    color: #666;
+
+}
+
+.troco-box strong{
+
+    font-size: 34px;
+
+    color: #0f5c2e;
+
+}
+
+.botoes{
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 35px;
+
+}
+
+.btn-confirmar{
+
+    flex: 1;
+
+    border: none;
+
+    background: #0f5c2e;
+
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.btn-confirmar:hover{
+
+    background: #0a4722;
+
+}
+
+.btn-cancelar{
+
+    flex: 1;
+
+    border: none;
+
+    background: #d62828;
+
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.btn-cancelar:hover{
+
+    background: #b71c1c;
+
+}
+
+.formas{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.forma-card{
+
+    border:2px solid #ddd;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.forma-card:hover{
+
+    border-color:#0f5c2e;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.1);
+
+}
+
+.forma-card input{
+
+    display:none;
+
+}
+
+.campo{
+
+    margin-top:25px;
+
+}
+
+.campo label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.campo input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:2px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+}
+
+.troco-box{
+
+    margin-top:25px;
+
+    background:#e9fff0;
+
+    border:2px solid #0f5c2e;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.troco-box span{
+
+    display:block;
+
+    color:#666;
+
+}
+
+.troco-box strong{
+
+    font-size:38px;
+
+    color:#0f5c2e;
+
+}
+
+#parcelas{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:2px solid #ddd;
+
+    font-size:17px;
+
+}
+
+#areaPix{
+
+    margin-top: 25px;
+
+    background: #f8fafc;
+
+    border: 2px solid #e5e7eb;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+
+}
+
+#areaPix h3{
+
+    color: #0f5c2e;
+
+    font-size: 24px;
+
+    margin-bottom: 20px;
+
+}
+
+.qrcode-pix{
+
+    width: 250px;
+
+    height: 250px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    background: white;
+
+    padding: 10px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,.1);
+
+}
+
+.chave-pix{
+
+    margin-top: 20px;
+
+    font-size: 18px;
+
+}
+
+.chave-pix strong{
+
+    color: #0f5c2e;
+
+    font-size: 20px;
+
+}
+
+.btn-copiar-pix{
+
+    margin-top: 15px;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #0f5c2e;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.btn-copiar-pix:hover{
+
+    background: #0c4a25;
+
+}

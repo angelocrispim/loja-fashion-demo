@@ -1,0 +1,86 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block page_title %}
+Painel Administrativo
+{% endblock %}
+
+{% block content %}
+
+<div class="cards">
+
+    <div class="card">
+
+        <h2>Usuários</h2>
+
+        <div class="numero">
+            {{ total_usuarios }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Produtos</h2>
+
+        <div class="numero">
+            {{ total_produtos }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Pedidos</h2>
+
+        <div class="numero">
+            {{ total_pedidos }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Vendas</h2>
+
+        <div class="numero">
+            R$ {{ total_vendas }}
+        </div>
+
+    </div>
+
+</div>
+
+<div class="table-box">
+
+    <h2 style="margin-bottom:20px;">
+        Últimos pedidos
+    </h2>
+
+    {% for pedido in pedidos %}
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:15px 0;
+        border-bottom:1px solid #eee;
+    ">
+
+        <div>
+            Pedido #{{ pedido.id }}
+        </div>
+
+        <div>
+            R$ {{ pedido.total }}
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

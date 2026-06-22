@@ -1,0 +1,120 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Dashboard Financeiro
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>
+        Dashboard Financeiro
+    </h1>
+
+    <div class="cards-grid">
+
+        <div class="card-financeiro">
+
+            <span>Vendas Hoje</span>
+
+            <h2>
+                R$
+                {{ "%.2f"|format(vendas_hoje) }}
+            </h2>
+
+        </div>
+
+        <div class="card-financeiro">
+
+            <span>Vendas do Mês</span>
+
+            <h2>
+                R$
+                {{ "%.2f"|format(vendas_mes) }}
+            </h2>
+
+        </div>
+
+        <div class="card-financeiro">
+
+            <span>Total de Vendas</span>
+
+            <h2>
+                {{ quantidade_vendas }}
+            </h2>
+
+        </div>
+
+        <div class="card-financeiro">
+
+            <span>Ticket Médio</span>
+
+            <h2>
+                R$
+                {{ "%.2f"|format(ticket_medio) }}
+            </h2>
+
+        </div>
+
+        <div class="grafico-card">
+
+            <h2>
+                Vendas por Dia
+            </h2>
+
+            <canvas id="graficoVendas"></canvas>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx =
+document.getElementById(
+    "graficoVendas"
+);
+
+new Chart(ctx, {
+
+    type: "line",
+
+    data: {
+
+        labels: {{ labels|tojson }},
+
+        datasets: [{
+
+            label: "Vendas",
+
+            data: {{ valores|tojson }},
+
+            borderWidth: 3,
+
+            tension: 0.4
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

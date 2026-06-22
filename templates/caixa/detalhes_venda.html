@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Venda #{{ venda.id }}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/caixa/detalhes_venda.css"
+    >
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Venda #{{ venda.id }}
+        </h1>
+
+        <div class="cabecalho-cupom">
+
+            <h2>
+                LOJA FASHION
+            </h2>
+
+            <div class="dados-venda">
+
+                <p>
+                    <strong>Venda:</strong>
+                    #{{ venda.id }}
+                </p>
+
+                <p>
+                    <strong>Data:</strong>
+                    {{ venda.data_venda.strftime('%d/%m/%Y %H:%M') }}
+                </p>
+
+                <p>
+                    <strong>Operador:</strong>
+                    {{ funcionario.nome }}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="info pagamento-info">
+
+            <p>
+                <strong>Pagamento:</strong>
+                {{ venda.pagamento }}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                R$ {{ "%.2f"|format(venda.total) }}
+            </p>
+
+            <p>
+                <strong>Parcelas:</strong>
+                {{ venda.parcelas }}x
+            </p>
+
+            <p>
+                <strong>Valor da Parcela:</strong>
+                R$ {{ "%.2f"|format(venda.valor_parcela) }}
+            </p>
+
+        </div>
+
+        <hr>
+
+        <h2>
+            Itens da Venda
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Produto</th>
+                    <th>Qtd</th>
+                    <th>Valor</th>
+                    <th>Subtotal</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in venda.itens %}
+
+                <tr>
+
+                    <td>
+                        {{ item.produto.nome }}
+                    </td>
+
+                    <td>
+                        {{ item.quantidade }}
+                    </td>
+
+                    <td>
+                        R$ {{ "%.2f"|format(item.preco_unitario) }}
+                    </td>
+
+                    <td>
+                        R$ {{ "%.2f"|format(item.subtotal) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="acoes">
+
+            <button
+                class="btn-imprimir"
+                onclick="imprimirCupom()"
+            >
+                🖨️ Imprimir Cupom
+            </button>
+
+            <script>
+
+            function imprimirCupom(){
+
+                window.print()
+
+            }
+
+            </script>
+
+            <button onclick="window.close()">
+                ❌ Fechar
+            </button>       
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

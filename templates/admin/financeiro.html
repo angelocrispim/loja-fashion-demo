@@ -1,0 +1,89 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Financeiro
+{% endblock %}
+
+{% block page_title %}
+Financeiro
+{% endblock %}
+
+{% block content %}
+
+<div class="cards">
+
+    <div class="card">
+
+        <h2>
+            Entradas
+        </h2>
+
+        <div class="numero">
+            R$ {{ entradas }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>
+            Saídas
+        </h2>
+
+        <div class="numero">
+            R$ {{ saidas }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>
+            Saldo
+        </h2>
+
+        <div class="numero">
+            R$ {{ saldo }}
+        </div>
+
+    </div>
+
+</div>
+
+<div class="table-box">
+
+    <h2 style="margin-bottom:20px;">
+        Fluxo de Caixa
+    </h2>
+
+    {% for mov in movimentacoes %}
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:15px 0;
+        border-bottom:1px solid #eee;
+    ">
+
+        <div>
+
+            {{ mov.descricao }}
+
+            -
+            {{ mov.tipo }}
+
+        </div>
+
+        <div>
+
+            R$ {{ mov.valor }}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

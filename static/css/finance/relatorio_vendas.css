@@ -1,0 +1,90 @@
+.finance-dashboard{
+
+    padding: 30px;
+
+}
+
+.finance-dashboard h1{
+
+    font-size: 32px;
+
+    margin-bottom: 30px;
+
+    color: #111;
+
+}
+
+.cards-grid{
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap: 25px;
+
+}
+
+.card-finance{
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
+
+    transition: .3s;
+
+}
+
+.card-finance:hover{
+
+    transform: translateY(-5px);
+
+}
+
+.card-finance h3{
+
+    color: #666;
+
+    font-size: 16px;
+
+    margin-bottom: 15px;
+
+}
+
+.card-finance span{
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #0f5c2e;
+
+}
+
+.grafico-card{
+
+    margin-top: 40px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.grafico-card h2{
+
+    margin-bottom: 20px;
+
+    color: #111;
+
+}

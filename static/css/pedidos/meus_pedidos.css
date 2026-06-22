@@ -1,0 +1,328 @@
+.pedidos-container{
+    padding: 140px 8%;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.titulo-pedidos{
+    font-size: 42px;
+    margin-bottom: 50px;
+    color: #111;
+}
+
+.pedido-card{
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.pedido-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.pedido-topo h2{
+    font-size: 28px;
+    color: #111;
+}
+
+.status{
+    margin-top: 10px;
+    color: #666;
+    font-size: 16px;
+}
+
+.status span{
+    background: #0f5c2e;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 30px;
+    margin-left: 8px;
+    font-size: 14px;
+}
+
+.pedido-produtos{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.produto-item{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.produto-item img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.produto-info{
+    flex: 1;
+}
+
+.produto-info h3{
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.produto-info p{
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.sem-pedidos{
+    background: white;
+    padding: 60px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
+
+.sem-pedidos h2{
+    margin-bottom: 30px;
+    color: #111;
+}
+
+.sem-pedidos a{
+    background: #111;
+    color: white;
+    padding: 16px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.sem-pedidos a:hover{
+    background: #0f5c2e;
+}
+
+.btn-remover-pedido{ display: inline-block; margin-top: 25px; 
+    background: #c0392b; 
+    color: white; 
+    padding: 14px 24px; 
+    border-radius: 12px; 
+    text-decoration: none; 
+    font-weight: bold; transition: .3s; 
+} 
+.btn-remover-pedido:hover{ 
+    background: #922b21; 
+}
+
+
+.btn-carrinho-novamente{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 15px;
+
+    background: #111;
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.btn-carrinho-novamente:hover{
+    background: #0f5c2e;
+}
+
+
+
+@media(max-width: 768px){
+
+    .produto-item{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pedido-topo{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+}
+
+.data-pedido{
+
+    color: #666;
+
+    margin-top: 5px;
+
+}
+
+.pedido-resumo{
+
+    text-align: right;
+
+}
+
+.pedido-resumo p{
+
+    margin: 8px 0;
+
+}
+
+.pedido-acoes{
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+}
+
+.status span{
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+}
+
+/* Status */
+
+.status-pago{
+
+    background: #d4edda;
+
+    color: #155724;
+
+}
+
+.status-aguardando-pix{
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+.status-pendente{
+
+    background: #f8d7da;
+
+    color: #721c24;
+
+}
+
+.status-em-separação,
+.status-em-separacao{
+
+    background: #d1ecf1;
+
+    color: #0c5460;
+
+}
+
+.status-enviado{
+
+    background: #cce5ff;
+
+    color: #004085;
+
+}
+
+.status-entregue{
+
+    background: #d4edda;
+
+    color: #155724;
+
+}
+
+/* ==========================
+   BARRA DE PROGRESSO
+========================== */
+
+.progresso-pedido{
+
+    display: flex;
+
+    align-items: center;
+
+    margin: 20px 0;
+
+    flex-wrap: wrap;
+
+}
+
+.etapa{
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #dcdcdc;
+
+    color: #666;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+}
+
+.etapa.ativa{
+
+    background: #224F34;
+
+    color: white;
+
+}
+
+.linha{
+
+    flex: 1;
+
+    height: 4px;
+
+    background: #dcdcdc;
+
+    min-width: 30px;
+
+}
+
+.linha.ativa{
+
+    background: #224F34;
+
+}
+

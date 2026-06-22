@@ -1,0 +1,138 @@
+.cadastro-section{
+    width: 100%;
+    min-height: 100vh;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.cadastro-container{
+    width: 100%;
+    max-width: 1100px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.cadastro-left{
+    background: linear-gradient(135deg, #0f5132, #198754);
+    color: white;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cadastro-left h1{
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.cadastro-left p{
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.cadastro-left img{
+    width: 100%;
+    max-width: 350px;
+}
+
+.cadastro-right{
+    padding: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.cadastro-form{
+    width: 100%;
+}
+
+.cadastro-form h2{
+    font-size: 35px;
+    margin-bottom: 30px;
+    color: #0f5132;
+}
+
+.input-group{
+    margin-bottom: 20px;
+}
+
+.input-group label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.input-group input:focus{
+    border-color: #198754;
+    box-shadow: 0 0 10px rgba(25,135,84,0.2);
+}
+
+.btn-cadastrar{
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #198754;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cadastrar:hover{
+    background: #146c43;
+    transform: translateY(-2px);
+}
+
+.login-link{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.login-link a{
+    color: #198754;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover{
+    text-decoration: underline;
+}
+
+@media(max-width: 900px){
+
+    .cadastro-container{
+        grid-template-columns: 1fr;
+    }
+
+    .cadastro-left{
+        display: none;
+    }
+
+    .cadastro-right{
+        padding: 40px 25px;
+    }
+
+}
+

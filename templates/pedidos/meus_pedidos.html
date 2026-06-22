@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}
+Meus Pedidos
+{% endblock %}
+
+{% block extra_css %} 
+<link rel="stylesheet" href="{{ url_for('static', path='/css/pedidos/meus_pedidos.css') }}"> 
+{% endblock %}
+
+{% block content %}
+
+<section class="pedidos-container">
+
+    <h1 class="titulo-pedidos">
+        Meus Pedidos
+    </h1>
+
+    {% if pedidos %}
+
+        {% for pedido in pedidos %}
+
+        <div class="pedido-card">
+
+            <div class="pedido-topo">
+
+                <div>
+
+                    <h2>
+                        📦 Pedido #{{ pedido.id }}
+                    </h2>
+
+                    <p class="data-pedido">
+                        📅 {{ pedido.criado_em.strftime("%d/%m/%Y %H:%M") }}
+                    </p>
+
+                </div>
+
+                <div class="pedido-resumo">
+
+                    <p class="status">
+                        Status:
+                        <span class="status-{{ pedido.status|lower|replace(' ', '-') }}">
+                            {{ pedido.status }}
+                        </span>
+                    </p>
+
+                    <div class="progresso-pedido">
+
+                        <div class="etapa
+                            {% if pedido.status in ['Pago', 'Em Separação', 'Enviado', 'Entregue'] %}
+                                ativa
+                            {% endif %}
+                        ">
+                            Pago
+                        </div>
+
+                        <div class="linha
+                            {% if pedido.status in ['Em Separação', 'Enviado', 'Entregue'] %}
+                                ativa
+                            {% endif %}
+                        "></div>
+
+                        <div class="etapa
+                            {% if pedido.status in ['Em Separação', 'Enviado', 'Entregue'] %}
+                                ativa
+                            {% endif %}
+                        ">
+                            Separação
+                        </div>
+
+                        <div class="linha
+                            {% if pedido.status in ['Enviado', 'Entregue'] %}
+                                ativa
+                            {% endif %}
+                        "></div>
+
+                        <div class="etapa
+                            {% if pedido.status in ['Enviado', 'Entregue'] %}
+                                ativa
+                            {% endif %}
+                        ">
+                            Enviado
+                        </div>
+
+                        <div class="linha
+                            {% if pedido.status == 'Entregue' %}
+                                ativa
+                            {% endif %}
+                        "></div>
+
+                        <div class="etapa
+                            {% if pedido.status == 'Entregue' %}
+                                ativa
+                            {% endif %}
+                        ">
+                            Entregue
+                        </div>
+
+                    </div>
+
+                    <p>
+                        💳 Forma de pagamento:
+                        <strong>
+                            {{ pedido.forma_pagamento }}
+                        </strong>
+                    </p>
+
+                    <p>
+                        💰 Total:
+                        <strong>
+                            R$ {{ "%.2f"|format(pedido.total) }}
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="pedido-produtos">
+
+                {% for item in pedido.itens %}
+
+                <div class="produto-item">
+
+                    <img
+                        src="{{ item.produto.imagem }}"
+                        alt="{{ item.produto.nome }}"
+                    >
+
+                    <div class="produto-info">
+
+                        <h3>
+                            {{ item.produto.nome }}
+                        </h3>
+
+                        <p>
+                            Quantidade:
+                            {{ item.quantidade }}
+                        </p>
+
+                        <p>
+                            Valor unitário:
+                            R$ {{ "%.2f"|format(item.preco) }}
+                        </p>
+
+                    </div>
+
+                    <a href="/adicionar-carrinho/{{ item.produto.id }}"
+                    class="btn-carrinho-novamente">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Comprar Novamente
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="pedido-acoes">
+
+                <a href="/remover-pedido/{{ pedido.id }}"
+                class="btn-remover-pedido">
+
+                    🗑️ Remover Pedido
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="sem-pedidos">
+
+            <h2>
+                Você ainda não realizou pedidos.
+            </h2>
+
+            <a href="/produtos">
+                Ver Produtos
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

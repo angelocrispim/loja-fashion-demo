@@ -1,0 +1,143 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Pedidos
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', path='/css/admin/pedidos.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="pedidos">
+
+    <div class="page-header">
+
+        <h1>Pedidos da Loja</h1>
+
+        <p>
+            Gerencie todos os pedidos realizados
+        </p>
+
+    </div>
+
+    <div class="pedidos-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for pedido in pedidos %}
+
+                <tr>
+
+                    <td>
+
+                        <a href="/admin/pedido/{{ pedido.id }}"
+                            class="pedido-link">
+
+                            #{{ pedido.id }}
+
+                        </a>
+
+                    </td>
+
+                    <td>
+                        {{ pedido.usuario.nome }}
+                    </td>
+
+                    <td class="valor">
+                        R$ {{ pedido.total }}
+                    </td>
+                    
+                    <td>
+
+                        <form
+                            method="POST"
+                            action="/admin/pedidos/{{ pedido.id }}/status"
+                            class="form-status"
+                        >
+
+                            <select name="status">
+
+                                <option
+                                    value="Pago"
+                                    {% if pedido.status == "Pago" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Pago
+                                </option>
+
+                                <option
+                                    value="Em Separação"
+                                    {% if pedido.status == "Em Separação" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Em Separação
+                                </option>
+
+                                <option
+                                    value="Enviado"
+                                    {% if pedido.status == "Enviado" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Enviado
+                                </option>
+
+                                <option
+                                    value="Entregue"
+                                    {% if pedido.status == "Entregue" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Entregue
+                                </option>
+
+                            </select>
+
+                            <button type="submit">
+
+                                Salvar
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                    <td>
+
+                        {{ pedido.criado_em.strftime('%d/%m/%Y') }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

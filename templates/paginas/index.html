@@ -1,0 +1,693 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - Loja Fashion
+{% endblock %}
+
+{% block extra_css %} 
+<link rel="stylesheet" href="{{ url_for('static', path='/css/index.css') }}"> 
+{% endblock %}
+
+{% block content %}
+
+<section >
+        <div class="home">
+            <div class="swiper home-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="box" style="background: url(./static/imagens/banner001.png);">
+                            <div class="content">
+                                <span>Upto 75% off</span>
+                                <h3>Discover and <br> Sale Special Offer <br> Fashion</h3>
+                                <a href="" class="btn">Order Now!</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="box" style="background: url(./static/imagens/banner002.png);">
+                            <div class="content">
+                                <span>Upto 75% off</span>
+                                <h3>Discover and <br> Sale Special Offer <br> Fashion</h3>
+                                <a href="" class="btn">Order Now!</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="box" style= "background: url(./static/imagens/banner003.png);" >
+                            <div class="content">
+                                <span>Upto 75% off</span>
+                                <h3>Discover and <br> Sale Special Offer <br> Fashion</h3>
+                                <a href="" class="btn">Order Now!</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section_container ins_container" id="ins">
+            <div class="ins_flex">
+                <img src="{{ url_for('static', path='/imagens/imagem01.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem02.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem03.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem04.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem05.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem06.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem07.jpg') }}" alt="">
+                <img src="{{ url_for('static', path='/imagens/imagem08.jpg') }}" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section class="categorias-home">
+
+        <h1 class="heading">
+            Categorias
+        </h1>
+
+        <div class="categorias-grid">
+
+            <a href="/mens" class="categoria-card">
+
+                <i class="fa-solid fa-shirt"></i>
+
+                <h3>Masculino</h3>
+
+            </a>
+
+            <a href="/mulher" class="categoria-card">
+
+                <i class="fa-solid fa-person-dress"></i>
+
+                <h3>Feminino</h3>
+
+            </a>
+
+            <a href="/calcados" class="categoria-card">
+
+                <i class="fa-solid fa-shoe-prints"></i>
+
+                <h3>Calçados</h3>
+
+            </a>
+
+            <a href="/infantil" class="categoria-card">
+
+                <i class="fa-solid fa-child"></i>
+
+                <h3>Infantil</h3>
+
+            </a>
+
+            <a href="/acessorios" class="categoria-card">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+                <h3>Acessórios</h3>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Produção -->
+    <section class="sell" id="product">
+
+        <h1 class="heading">
+            Produtos em Destaque
+        </h1>
+
+        <div class="box-container">
+
+            {% for produto in produtos_destaque %}
+
+            <div class="box">
+
+                <div class="icons">
+
+                    <a
+                        href="/produto/{{ produto.id }}"
+                        class="btn"
+                    >
+                        Ver Produto
+                    </a>
+
+                </div>
+
+                <div class="image">
+
+                    <img
+                        src="{{ produto.imagem }}"
+                        alt="{{ produto.nome }}"
+                    >
+
+                </div>
+
+                <div class="content">
+
+                    <h4>
+                        {{ produto.nome }}
+                    </h4>
+
+                    <p
+                        style="
+                        color:#224F34;
+                        font-weight:bold;
+                        font-size:18px;
+                        margin-top:10px;
+                        "
+                    >
+                        R$ {{ "%.2f"|format(produto.preco) }}
+                    </p>
+
+                    <div
+                        style="
+                        margin-top:15px;
+                        "
+                    >
+
+                        <i class="fas fa-shopping-cart"></i>
+
+                        <i class="fas fa-heart"></i>
+
+                        <i class="fas fa-eye"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- Banner -->
+     <!--<section class="banner-container">
+        <div class="banner">
+            <img src="{{ url_for('static', path='/imagens/banner01.jpg') }}" alt="">
+            <div class="content">
+                <span>40% Off</span>
+                <h3>Limited Offer</h3>
+                <a href="" class="btn">Order Now!</a>
+            </div>
+        </div>
+        
+        <div class="banner">
+            <img src="{{ url_for('static', path='/imagens/banner02.jpg') }}" alt="">
+            <div class="content">
+                <span>40% Off</span>
+                <h3>Limited Offer</h3>
+                <a href="" class="btn">Order Now!</a>
+            </div>
+        </div>
+
+        <div class="banner">
+            <img src="{{ url_for('static', path='/imagens/banner03.jpg') }}" alt="">
+            <div class="content">
+                <span>40% Off</span>
+                <h3>Limited Offer</h3>
+                <a href="" class="btn">Order Now!</a>
+            </div>
+        </div>
+     </section>-->
+
+     <!-- Banner Promoções -->
+    <section class="banner-container">
+
+        {% for produto in promocoes %}
+
+        <div class="banner">
+
+            <img
+                src="{{ produto.imagem }}"
+                alt="{{ produto.nome }}"
+            >
+
+            <div class="content">
+
+                <span>
+
+                    {% if produto.em_promocao %}
+
+                        {{ produto.percentual_desconto }}% Off
+
+                    {% else %}
+
+                        Novo
+
+                    {% endif %}
+
+                </span>
+
+                <h3>
+
+                    {{ produto.nome }}
+
+                </h3>
+
+                <p>
+
+                    De R$
+                    {{ "%.2f"|format(produto.preco) }}
+
+                </p>
+
+                <p>
+
+                    Por R$
+
+                    {{ "%.2f"|format(
+                        produto.preco -
+                        (
+                            produto.preco *
+                            produto.percentual_desconto / 100
+                        )
+                    ) }}
+
+                </p>
+
+                <a
+                    href="/produto/{{ produto.id }}"
+                    class="btn"
+                >
+
+                    Comprar Agora
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+     <!-- Sell -->
+     <!--<section class="sell" style="background-color: #e3e7f3;">
+        <h1 class="heading">Best Sell</h1>
+        <div class="box-container">
+            <div class="box">
+                <div class="icons">
+                    <a href="" class="btn">Order Now!</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', path='/imagens/sell.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h4>Shirt Collecttion</h4>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="icons">
+                    <a href="" class="btn">Order Now!</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', path='/imagens/sell01.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h4>Shirt Collecttion</h4>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="icons">
+                    <a href="" class="btn">Order Now!</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', path='/imagens/sell02.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h4>Shirt Collecttion</h4>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="icons">
+                    <a href="" class="btn">Order Now!</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', path='/imagens/sell03.jpg') }}" alt="">
+                </div>
+                <div class="content">
+                    <h4>Shirt Collecttion</h4>
+                </div>
+            </div>
+        </div>
+     </section>-->
+
+     <section class="sell" style="background-color: #e3e7f3;">
+
+        <h1 class="heading">
+
+            ⭐ Mais Vendidos
+
+        </h1>
+
+        <div class="box-container">
+
+            {% for produto, vendidos in mais_vendidos %}
+
+            <div class="box">
+
+                <div class="icons">
+
+                    <a
+                        href="/produto/{{ produto.id }}"
+                        class="btn"
+                    >
+
+                        Comprar Agora
+
+                    </a>
+
+                </div>
+
+                <div class="image">
+
+                    <img
+                        src="{{ produto.imagem }}"
+                        alt="{{ produto.nome }}"
+                    >
+
+                </div>
+
+                <div class="content">
+
+                    <h4>
+
+                        {{ produto.nome }}
+
+                    </h4>
+
+                    <p class="vendidos">
+
+                        ⭐ {{ vendidos }} vendidos
+
+                    </p>
+
+                    <p class="preco">
+
+                        R$ {{ "%.2f"|format(produto.preco) }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+     <!-- promotion banner -->
+      <section class="timer-banner" style="background-color: #e3e7f3;">
+        <div class="time" style="background: url(./static/imagens/offer.png) center center; background-size: cover;">
+            <div class="insidemain">
+                <br>
+                <div class="title enddate">
+
+                    <span>
+
+                    🔥 Exclusive Offer
+
+                </span>
+
+                <h2>
+
+                    Ofertas Especiais Da Loja Fashion
+
+                </h2>
+                    </h2>
+
+                    <p class="offer-status">
+
+                        🔥 Oferta acontecendo agora
+
+                    </p>
+
+                    <p class="offer-date">
+
+                        📅 Início:
+                        <strong>
+                            21/06/2026 às 00:00
+                        </strong>
+
+                    </p>
+
+                    <p class="offer-date">
+
+                        ⏰ Término:
+                        <strong>
+                            28/06/2026 às 23:59
+                        </strong>
+
+                    </p>
+
+                </div> 
+
+                <div class="inp">
+
+                    <div class="infield">
+
+                        <h3>Dias</h3>
+
+                        <input
+                            type="text"
+                            id="days"
+                            value="0"
+                            readonly
+                        >
+
+                    </div>
+                    <!-- inicio-->
+                    <div class="infield">
+
+                        <h3>Horas</h3>
+
+                        <input
+                            type="text"
+                            id="hours"
+                            value="0"
+                            readonly
+                        >
+
+                    </div>
+
+                    <div class="infield">
+
+                        <h3>Minutos</h3>
+
+                        <input
+                            type="text"
+                            id="minutes"
+                            value="0"
+                            readonly
+                        >
+
+                    </div>
+
+                    <div class="infield">
+
+                        <h3>Segundos</h3>
+
+                        <input
+                            type="text"
+                            id="seconds"
+                            value="0"
+                            readonly
+                        >
+
+                    </div>
+                    <!--fim-->
+                </div>
+
+
+            </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+
+      <section class="vantagens-home">
+
+        <h1 class="heading">
+            Por Que Comprar Na Loja Fashion?
+        </h1>
+
+        <div class="vantagens-grid">
+
+            <div class="vantagem-card">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+                <h3>Frete Para Todo Brasil</h3>
+
+                <p>
+                    Entregamos com rapidez e segurança.
+                </p>
+
+            </div>
+
+            <div class="vantagem-card">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <h3>Compra Segura</h3>
+
+                <p>
+                    Seus pagamentos protegidos.
+                </p>
+
+            </div>
+
+            <div class="vantagem-card">
+
+                <i class="fa-solid fa-tags"></i>
+
+                <h3>Ofertas Exclusivas</h3>
+
+                <p>
+                    Promoções especiais toda semana.
+                </p>
+
+            </div>
+
+            <div class="vantagem-card">
+
+                <i class="fa-solid fa-robot"></i>
+
+                <h3>Fashion IA</h3>
+
+                <p>
+                    Atendimento inteligente para ajudar você.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<script>
+
+const inicioOferta = new Date(
+    "2026-06-21T00:00:00"
+);
+
+const fimOferta = new Date(
+    "2026-06-28T23:59:59"
+);
+
+function atualizarContador(){
+
+    const agora = new Date();
+
+    let diferenca;
+
+    if(agora < inicioOferta){
+
+        document.querySelector(
+            ".offer-status"
+        ).innerText =
+        "⏳ Oferta ainda não começou";
+
+        diferenca =
+            inicioOferta - agora;
+
+    }
+
+    else if(agora > fimOferta){
+
+        document.querySelector(
+            ".offer-status"
+        ).innerText =
+        "❌ Oferta encerrada";
+
+        diferenca = 0;
+
+    }
+
+    else{
+
+        document.querySelector(
+            ".offer-status"
+        ).innerText =
+        "🔥 Oferta acontecendo agora";
+
+        diferenca =
+            fimOferta - agora;
+
+    }
+
+    const dias = Math.floor(
+        diferenca /
+        (1000 * 60 * 60 * 24)
+    );
+
+    const horas = Math.floor(
+        (
+            diferenca %
+            (1000 * 60 * 60 * 24)
+        ) /
+        (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+        (
+            diferenca %
+            (1000 * 60 * 60)
+        ) /
+        (1000 * 60)
+    );
+
+    const segundos = Math.floor(
+        (
+            diferenca %
+            (1000 * 60)
+        ) / 1000
+    );
+
+    document.getElementById(
+        "days"
+    ).value = dias;
+
+    document.getElementById(
+        "hours"
+    ).value = horas;
+
+    document.getElementById(
+        "minutes"
+    ).value = minutos;
+
+    document.getElementById(
+        "seconds"
+    ).value = segundos;
+
+}
+
+atualizarContador();
+
+setInterval(
+    atualizarContador,
+    1000
+);
+
+</script>
+
+{% endblock %}

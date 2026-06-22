@@ -1,0 +1,175 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Pedido #{{ pedido.id }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/detalhe_pedido.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="detalhe-pedido">
+
+    <div class="pedido-topo">
+
+        <h1>
+            Pedido #{{ pedido.id }}
+        </h1>
+
+        <span class="status">
+            {{ pedido.status }}
+        </span>
+
+    </div>
+
+    <div class="pedido-info">
+
+        <div class="info-card">
+
+            <h3>Cliente</h3>
+
+            <p>
+                {{ pedido.usuario.nome }}
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>Total</h3>
+
+            <p class="total">
+                R$ {{ pedido.total }}
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>Data</h3>
+
+            <p>
+                {{ pedido.criado_em.strftime('%d/%m/%Y') }}
+            </p>
+
+            <p>
+
+                <strong>Status:</strong>
+
+                {{ pedido.status }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!--form-->
+
+    <form
+    action="/admin/pedido/{{ pedido.id }}/status"
+    method="post"
+    >
+
+        <label>
+
+            Alterar Status
+
+        </label>
+
+        <select
+            name="status"
+        >
+
+            <option value="Pendente">
+
+                Pendente
+
+            </option>
+
+            <option value="Pago">
+
+                Pago
+
+            </option>
+
+            <option value="Separando">
+
+                Separando
+
+            </option>
+
+            <option value="Enviado">
+
+                Enviado
+
+            </option>
+
+            <option value="Entregue">
+
+                Entregue
+
+            </option>
+
+            <option value="Cancelado">
+
+                Cancelado
+
+            </option>
+
+        </select>
+
+        <button
+            type="submit"
+        >
+
+            Salvar Status
+
+        </button>
+
+    </form>
+
+    <!--fim form-->
+
+    <div class="itens-pedido">
+
+        <h2>
+            Produtos
+        </h2>
+
+        {% for item in pedido.itens %}
+
+        <div class="item-card">
+
+            <img src="{{ item.produto.imagem }}">
+
+            <div class="item-info">
+
+                <h3>
+                    {{ item.produto.nome }}
+                </h3>
+
+                <p>
+                    Quantidade:
+                    {{ item.quantidade }}
+                </p>
+
+                <p>
+                    Preço:
+                    R$ {{ item.preco }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

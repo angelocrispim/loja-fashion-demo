@@ -1,0 +1,89 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Melhores Clientes
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/finance/melhores_clientes.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="clientes-page">
+
+    <div class="page-header">
+
+        <h1>
+            Melhores Clientes
+        </h1>
+
+        <p>
+            Clientes que mais compraram na loja
+        </p>
+
+    </div>
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Ranking</th>
+                    <th>Cliente</th>
+                    <th>Pedidos</th>
+                    <th>Total Comprado</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for cliente in clientes %}
+
+                <tr>
+
+                    <td>
+
+                        🏆 {{ loop.index }}
+
+                    </td>
+
+                    <td>
+
+                        {{ cliente.nome }}
+
+                    </td>
+
+                    <td>
+
+                        {{ cliente.total_pedidos }}
+
+                    </td>
+
+                    <td>
+
+                        R$ {{ "%.2f"|format(cliente.total_comprado) }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

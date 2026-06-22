@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cadastro - Usuário
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', path='/css/cadastro.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="cadastro-section">
+
+    <div class="cadastro-container">
+
+        <div class="cadastro-left">
+            <h1>Crie sua conta</h1>
+
+            <p>
+                Cadastre-se para acompanhar pedidos,
+                salvar produtos favoritos e aproveitar
+                as novidades da Loja Fashion.
+            </p>
+
+            <img src="/static/img/fashion-banner.png" alt="Fashion">
+        </div>
+
+        <div class="cadastro-right">
+
+            <form action="/cadastro" method="POST" class="cadastro-form">
+
+                <h2>Cadastrar</h2>
+
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <input type="text" name="nome" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone">
+                </div>
+
+                <div class="input-group">
+                    <label>CPF</label>
+                    <input type="text" name="cpf">
+                </div>
+
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" name="senha" required>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">
+                    Criar Conta
+                </button>
+
+                <div class="login-link">
+                    Já possui conta?
+                    <a href="/login">Entrar</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{% endblock %}

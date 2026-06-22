@@ -1,0 +1,141 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Detalhes da Venda
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/detalhe_venda.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="detalhe-venda">
+
+    <div class="topo-venda">
+
+        <h1>
+            Venda #{{ venda.id }}
+        </h1>
+
+        <a href="/admin/vendas" class="btn-voltar">
+
+            Voltar
+
+        </a>
+
+    </div>
+
+    <div class="info-venda">
+
+        <div class="info-card">
+
+            <span>Operador</span>
+
+            <strong>
+                {{ venda.funcionario.nome }}
+            </strong>
+
+        </div>
+
+        <div class="info-card">
+
+            <span>Pagamento</span>
+
+            <strong>
+                {{ venda.pagamento }}
+            </strong>
+
+        </div>
+
+        <div class="info-card">
+
+            <span>Data</span>
+
+            <strong>
+                {{ venda.data_venda.strftime("%d/%m/%Y %H:%M") }}
+            </strong>
+
+        </div>
+
+        <div class="info-card">
+
+            <span>Total</span>
+
+            <strong class="valor-total">
+
+                R$
+                {{ "%.2f"|format(venda.total) }}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="itens-venda">
+
+        <h2>
+            Produtos Vendidos
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Produto</th>
+
+                    <th>Quantidade</th>
+
+                    <th>Preço Unitário</th>
+
+                    <th>Subtotal</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in venda.itens %}
+
+                <tr>
+
+                    <td>
+                        {{ item.produto.nome }}
+                    </td>
+
+                    <td>
+                        {{ item.quantidade }}
+                    </td>
+
+                    <td>
+
+                        R$
+                        {{ "%.2f"|format(item.preco_unitario) }}
+
+                    </td>
+
+                    <td>
+
+                        R$
+                        {{ "%.2f"|format(item.subtotal) }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

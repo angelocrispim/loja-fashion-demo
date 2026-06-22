@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+Carrinho
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/carrinho.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="carrinho-page">
+
+    <h1 class="carrinho-title">
+        Meu Carrinho
+    </h1>
+
+    <div class="carrinho-container">
+
+        <!-- PRODUTOS -->
+        <div class="carrinho-produtos">
+
+            {% for item in itens %}
+
+            <div class="carrinho-card">
+
+                <div class="carrinho-img">
+
+                    <img src="{{ item.produto.imagem }}"
+                         alt="{{ item.produto.nome }}">
+
+                </div>
+
+                <div class="carrinho-info">
+
+                    <h2>
+                        {{ item.produto.nome }}
+                    </h2>
+
+                    <p>
+                        {{ item.produto.descricao }}
+                    </p>
+
+                    <div class="carrinho-preco">
+
+                        R$ {{ item.produto.preco }}
+
+                    </div>
+
+                    <!-- QUANTIDADE -->
+                    <div class="quantidade-box">
+
+                        <a href="/diminuir/{{ item.id }}">
+                            <button class="quantidade-btn">
+                                -
+                            </button>
+                        </a>
+
+                        <span class="quantidade-numero">
+                            {{ item.quantidade }}
+                        </span>
+
+                        <a href="/aumentar/{{ item.id }}">
+                            <button class="quantidade-btn">
+                                +
+                            </button>
+                        </a>
+
+                    </div>
+
+                    <!-- REMOVER -->
+                    <a href="/remover-carrinho/{{ item.id }}"
+                       class="btn-remover">
+
+                        Remover Produto
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- RESUMO -->
+        <div class="carrinho-resumo">
+
+            <h2>
+                Resumo do Pedido
+            </h2>
+
+            <div class="resumo-item">
+
+                <span>Total</span>
+
+                <span class="total">
+                    R$ {{ total }}
+                </span>
+
+            </div>
+
+            <a href="/checkout" class="btn-finalizar"> 
+                Ir para Checkout 
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

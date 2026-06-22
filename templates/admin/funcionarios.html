@@ -1,0 +1,215 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Funcionários
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/funcionarios.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <h1>
+        Funcionários
+    </h1>
+
+    <!-- FORM -->
+    <form
+        action="/admin/cadastrar-funcionario"
+        method="POST"
+        class="funcionario-form"
+    >
+
+        <input type="text"
+               name="nome"
+               placeholder="Nome">
+
+        <input type="text"
+                name="matricula"
+                placeholder="Matrícula">
+
+        <input type="email"
+               name="email"
+               placeholder="Email">
+
+        <input type="text"
+               name="telefone"
+               placeholder="Telefone">
+
+        <input type="text"
+                id="cpf"
+                name="cpf"
+                placeholder="CPF">
+
+        <input type="password"
+                name="senha"
+                placeholder="Senha">
+
+
+        <select name="cargo">
+
+            <option value="Administrador">
+                Administrador
+            </option>
+
+            <option value="Gerente">
+                Gerente
+            </option>
+
+            <option value="Vendedor">
+                Vendedor
+            </option>
+
+            <option value="Caixa">
+                Caixa
+            </option>
+
+            <option value="Estoquista">
+                Estoquista
+            </option>
+
+        </select>
+
+        <input type="text"
+                id="salario"
+                name="salario"
+                placeholder="Salário">
+
+        <button type="submit">
+            Cadastrar Funcionário
+        </button>
+
+    </form>
+
+    <!-- TABELA -->
+    <table class="funcionarios-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Cargo</th>
+                <th>Email</th>
+                <th>Salário</th>
+                <th>Status</th>
+                <th>Ações</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for funcionario in funcionarios %}
+
+            <tr>
+
+                <td>{{ funcionario.nome }}</td>
+
+                <td>{{ funcionario.matricula }}</td>
+
+                <td>{{ funcionario.cargo }}</td>
+
+                <td>{{ funcionario.email }}</td>
+
+                <td>
+                    R$ {{ "{:,.2f}".format(funcionario.salario)
+                        .replace(",", "X")
+                        .replace(".", ",")
+                        .replace("X", ".") }}
+                </td>
+
+                <td>
+
+                    {% if funcionario.status == "Ativo" %}
+
+                        <a href="/admin/desativar-funcionario/{{ funcionario.id }}"
+                        class="btn-status ativo">
+
+                            Ativo
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="/admin/ativar-funcionario/{{ funcionario.id }}"
+                        class="btn-status inativo">
+
+                            Inativo
+
+                        </a>
+
+                    {% endif %}
+
+                </td>
+
+                <td class="acoes">
+
+                    <a href="/admin/editar-funcionario/{{ funcionario.id }}"
+                    class="btn-editar">
+
+                        Editar
+
+                    </a>
+
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<script>
+
+    // =====================================
+    // MÁSCARA CPF
+    // =====================================
+
+    const cpfInput = document.getElementById("cpf");
+
+    cpfInput.addEventListener("input", () => {
+
+        let value = cpfInput.value.replace(/\D/g, "");
+
+        value = value.replace(/^(\d{3})(\d)/, "$1.$2");
+
+        value = value.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+
+        value = value.replace(/\.(\d{3})(\d)/, ".$1-$2");
+
+        cpfInput.value = value;
+
+    });
+
+
+    // =====================================
+    // MÁSCARA SALÁRIO
+    // =====================================
+
+    const salarioInput = document.getElementById("salario");
+
+    salarioInput.addEventListener("input", () => {
+
+        let value = salarioInput.value.replace(/\D/g, "");
+
+        value = (Number(value) / 100).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2
+        });
+
+        salarioInput.value = value;
+
+    });
+
+</script>
+
+{% endblock %}

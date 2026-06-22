@@ -1,0 +1,92 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Vendas
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/vendas.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <h1>Histórico de Vendas</h1>
+
+    <table class="vendas-table">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Data</th>
+
+                <th>Operador</th>
+
+                <th>Pagamento</th>
+
+                <th>Total</th>
+
+                <th>Ações</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for venda in vendas %}
+
+            <tr>
+
+                <td class="venda-id">
+                    #{{ venda.id }}
+                </td>
+
+                <td>
+                    {{ venda.data_venda.strftime("%d/%m/%Y %H:%M") }}
+                </td>
+
+                <td>
+                    {{ venda.funcionario.nome }}
+                </td>
+
+                <td>
+                    {{ venda.pagamento }}
+                </td>
+
+                <td class="total-venda">
+
+                    R$
+                    {{ "%.2f"|format(venda.total) }}
+
+                </td>
+
+                <td>
+
+                    <a
+                        href="/admin/venda/{{ venda.id }}"
+                        class="btn-visualizar"
+                    >
+
+                        Visualizar
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+{% endblock %}

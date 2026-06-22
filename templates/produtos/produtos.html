@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Produtos
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', path='/css/produtos.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="produtos-page">
+
+    <div class="banner-categoria">
+
+            <h1>
+                {{ titulo if titulo else "Nossos Produtos" }}
+            </h1>
+
+            <p>
+                Confira os melhores produtos da nossa coleção.
+            </p>
+
+        </div>
+
+        <div class="contador-produtos">
+
+        {{ produtos|length }} produto(s) encontrado(s)
+
+    </div>
+
+    <div class="produtos-grid">
+
+        {% for produto in produtos %}
+
+        <div class="produto-card">
+
+            <a href="/produto/{{ produto.id }}">
+
+                <div class="produto-imagem">
+
+                    <img src="{{ produto.imagem }}"
+                         alt="{{ produto.nome }}">
+
+                </div>
+
+                <div class="produto-info">
+
+                    <h2>{{ produto.nome }}</h2>
+
+                    <p class="categoria">
+                        {{ produto.categoria }}
+                    </p>
+
+                    <p class="preco">
+                        R$ {{ produto.preco }}
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
