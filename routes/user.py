@@ -105,6 +105,9 @@ def cadastrar_usuario(
 
     # 🔐 Criptografa senha
     senha_hash = hash_senha(senha)
+    
+    print("SENHA ORIGINAL:", senha)
+    print("HASH GERADO:", senha_hash)
 
     # 👤 Novo usuário
     novo_usuario = User(
@@ -212,8 +215,16 @@ def login(
             }
         )
 
+    # DEBUG
+    print("SENHA DIGITADA:", senha)
+    print("HASH DO BANCO:", usuario.senha)
+
+    resultado = verificar_senha(senha, usuario.senha)
+
+    print("RESULTADO:", resultado)
+
     # senha inválida
-    if not verificar_senha(senha, usuario.senha):
+    if not resultado:
         return templates.TemplateResponse(
             request=request,
             name="usuarios/login.html",
@@ -222,16 +233,12 @@ def login(
             }
         )
 
-    # ADMIN
     if usuario.is_admin:
-
         response = RedirectResponse(
             url="/admin",
             status_code=302
         )
-
     else:
-
         response = RedirectResponse(
             url=next_url,
             status_code=302
