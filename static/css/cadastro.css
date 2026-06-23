@@ -136,3 +136,42 @@
 
 }
 
+/* ==========================
+   MENSAGENS
+========================== */
+
+.mensagem-erro{
+    background: #ffe5e5;
+    color: #d63031;
+    border: 1px solid #ff7675;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    animation: aparecer 0.3s ease;
+}
+
+.mensagem-sucesso{
+    background: #e8fff1;
+    color: #00a854;
+    border: 1px solid #2ecc71;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer{
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

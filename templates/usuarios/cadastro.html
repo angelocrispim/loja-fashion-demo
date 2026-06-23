@@ -30,13 +30,15 @@ Cadastro - Usuário
         <div class="cadastro-right">
 
             {% if erro %}
-            <div class="alert alert-danger">
+            <div class="mensagem-erro">
+                <span>⚠️</span>
                 {{ erro }}
             </div>
             {% endif %}
 
             {% if sucesso %}
-            <div class="alert alert-success">
+            <div class="mensagem-sucesso">
+                <span>✅</span>
                 {{ sucesso }}
             </div>
             {% endif %}
