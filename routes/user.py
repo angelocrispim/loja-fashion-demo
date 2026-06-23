@@ -365,33 +365,33 @@ def perfil(
 # 👤 PERFIL DO ADMIN TEMPORARIO
 # =========================
 
-@router.get("/criar-superadmin")
-def criar_superadmin(
-    db: Session = Depends(get_db)
-):
+# @router.get("/criar-superadmin")
+# def criar_superadmin(
+#     db: Session = Depends(get_db)
+# ):
 
-    admin = db.query(User).filter(
-        User.email == "admin@lojafashion.com"
-    ).first()
+#     admin = db.query(User).filter(
+#         User.email == "admin@lojafashion.com"
+#     ).first()
 
-    if admin:
-        return {
-            "msg": "Super Admin já existe"
-        }
+#     if admin:
+#         return {
+#             "msg": "Super Admin já existe"
+#         }
 
-    novo_admin = User(
-        nome="Super Administrador",
-        email="admin@lojafashion.com",
-        senha=hash_senha("123456"),
-        telefone="00000000000",
-        cpf="00000000000",
-        is_admin=True,
-        is_superadmin=True
-    )
+#     novo_admin = User(
+#         nome="Super Administrador",
+#         email="admin@lojafashion.com",
+#         senha=hash_senha("123456"),
+#         telefone="00000000000",
+#         cpf="00000000000",
+#         is_admin=True,
+#         is_superadmin=True
+#     )
 
-    db.add(novo_admin)
-    db.commit()
+#     db.add(novo_admin)
+#     db.commit()
 
-    return {
-        "msg": "Super Admin criado com sucesso"
-    }
+#     return {
+#         "msg": "Super Admin criado com sucesso"
+#     }
