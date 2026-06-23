@@ -90,26 +90,38 @@ def cadastrar_usuario(
     db: Session = Depends(get_db)
 ):
 
-    # 🔍 Verifica se já existe
-    usuario = db.query(User).filter(User.email == email).first()
+    # Verifica email
+    usuario_email = db.query(User).filter(
+        User.email == email
+    ).first()
 
-    if usuario:
+    if usuario_email:
 
         return templates.TemplateResponse(
             request=request,
             name="usuarios/cadastro.html",
             context={
-            "erro": "Email já cadastrado"
-        }
-    )
+                "erro": "Este email já está cadastrado. Utilize outro email."
+            }
+        )
 
-    # 🔐 Criptografa senha
+    # Verifica CPF
+    usuario_cpf = db.query(User).filter(
+        User.cpf == cpf
+    ).first()
+
+    if usuario_cpf:
+
+        return templates.TemplateResponse(
+            request=request,
+            name="usuarios/cadastro.html",
+            context={
+                "erro": "Este CPF já está cadastrado. Utilize outro CPF."
+            }
+        )
+
     senha_hash = hash_senha(senha)
-    
-    print("SENHA ORIGINAL:", senha)
-    print("HASH GERADO:", senha_hash)
 
-    # 👤 Novo usuário
     novo_usuario = User(
         nome=nome,
         email=email,
@@ -126,8 +138,8 @@ def cadastrar_usuario(
         name="usuarios/cadastro.html",
         context={
             "sucesso": "Usuário cadastrado com sucesso!"
-    }
-)
+        }
+    )
 
 
 # =========================

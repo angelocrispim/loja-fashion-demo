@@ -29,6 +29,18 @@ Cadastro - Usuário
 
         <div class="cadastro-right">
 
+            {% if erro %}
+            <div class="alert alert-danger">
+                {{ erro }}
+            </div>
+            {% endif %}
+
+            {% if sucesso %}
+            <div class="alert alert-success">
+                {{ sucesso }}
+            </div>
+            {% endif %}
+
             <form action="/cadastro" method="POST" class="cadastro-form">
 
                 <h2>Cadastrar</h2>
