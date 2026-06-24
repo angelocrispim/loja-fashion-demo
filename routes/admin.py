@@ -709,3 +709,23 @@ def listar_usuarios(
             "usuarios": usuarios
         }
     )
+    
+# ====================================
+# criação de tabelas
+# ====================================
+    
+from sqlalchemy import text
+
+@router.get("/criar-campo-cargo")
+def criar_campo_cargo(db: Session = Depends(get_db)):
+
+    db.execute(
+        text("""
+        ALTER TABLE users
+        ADD COLUMN IF NOT EXISTS cargo VARCHAR DEFAULT 'cliente';
+        """)
+    )
+
+    db.commit()
+
+    return {"msg": "Campo cargo criado com sucesso"}
