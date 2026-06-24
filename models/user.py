@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String
 from database import Base
 from sqlalchemy import Boolean
 from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Boolean
 
 class User(Base):
     __tablename__ = "users"
@@ -11,6 +12,7 @@ class User(Base):
     nome = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     senha = Column(String, nullable=False)
+    cargo = Column(String, default="cliente")
     is_admin = Column(Boolean, default=False)
     is_superadmin = Column(Boolean, default=False)
 

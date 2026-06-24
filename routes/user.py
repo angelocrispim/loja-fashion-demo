@@ -127,7 +127,8 @@ def cadastrar_usuario(
         email=email,
         cpf=cpf,
         telefone=telefone,
-        senha=senha_hash
+        senha=senha_hash,
+        cargo="cliente"
     )
 
     db.add(novo_usuario)

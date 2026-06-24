@@ -674,3 +674,38 @@ def salvar_configuracoes(
         "/admin/configuracoes",
         status_code=302
     )
+    
+# ====================================
+# USUÁRIOS
+# ====================================
+
+@router.get("/admin/usuarios")
+def listar_usuarios(
+    request: Request,
+    usuario_id: str = Cookie(None),
+    db: Session = Depends(get_db)
+):
+
+    usuario = verificar_admin(
+        usuario_id,
+        db
+    )
+
+    if not usuario:
+        return RedirectResponse(
+            "/login",
+            status_code=302
+        )
+
+    usuarios = db.query(User).order_by(
+        User.id.desc()
+    ).all()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="admin/usuarios.html",
+        context={
+            "usuario": usuario,
+            "usuarios": usuarios
+        }
+    )
