@@ -1,7 +1,5 @@
 {% extends "admin_base.html" %}
 
-{% block content %}
-
 {% block extra_css %}
 
 <link rel="stylesheet"
@@ -12,7 +10,32 @@ href="{{ url_for('static', path='/css/admin/components.css') }}">
 
 {% endblock %}
 
-<h1>Administradores</h1>
+
+{% block content %}
+
+<div class="page-header">
+
+    <div class="page-title">
+
+        <h1>Administradores</h1>
+
+        <p>
+            Gerencie todos os administradores da loja.
+        </p>
+
+    </div>
+
+    <button
+        class="btn btn-primary"
+        onclick="abrirModalAdmin()">
+
+        <i class="fas fa-plus"></i>
+
+        Novo Administrador
+
+    </button>
+
+</div>
 
 <table class="table table-striped">
 
@@ -72,5 +95,130 @@ href="{{ url_for('static', path='/css/admin/components.css') }}">
     </tbody>
 
 </table>
+
+<!-- MODAL -->
+
+<div id="modalAdmin" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="fecharModalAdmin()">
+
+            &times;
+
+        </span>
+
+        <h2>Novo Administrador</h2>
+
+        <form
+            action="/admin/administradores/novo"
+            method="POST">
+
+            <div class="input-group">
+
+                <label>Nome</label>
+
+                <input
+                    type="text"
+                    name="nome"
+                    required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Telefone</label>
+
+                <input
+                    type="text"
+                    name="telefone">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>CPF</label>
+
+                <input
+                    type="text"
+                    name="cpf">
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Cargo</label>
+
+                <select name="cargo">
+
+                    <option value="admin">
+                        Administrador
+                    </option>
+
+                    <option value="gerente">
+                        Gerente
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Senha</label>
+
+                <input
+                    type="password"
+                    name="senha"
+                    required>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                type="submit">
+
+                Cadastrar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function abrirModalAdmin(){
+
+    document.getElementById(
+        "modalAdmin"
+    ).style.display="flex";
+
+}
+
+function fecharModalAdmin(){
+
+    document.getElementById(
+        "modalAdmin"
+    ).style.display="none";
+
+}
+
+</script>
 
 {% endblock %}
