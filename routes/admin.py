@@ -10,6 +10,7 @@ from fastapi import (
 
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from fastapi import Form
 
 from sqlalchemy.orm import Session
 
@@ -29,6 +30,7 @@ from models.employee import Employee
 from models.store_config import StoreConfig
 
 from utils.context import contexto_admin
+from utils.security import hash_senha
 
 
 router = APIRouter()
@@ -769,4 +771,90 @@ def administradores(
             "usuario": usuario,
             "usuarios": administradores
         }
+    )
+    
+# ====================================
+# CADATRAR ADMINISTRADORES
+# ====================================
+    
+@router.post("/admin/administradores/novo")
+def novo_administrador(
+    request: Request,
+    usuario_id: str = Cookie(None),
+
+    nome: str = Form(...),
+    email: str = Form(...),
+    telefone: str = Form(""),
+    cpf: str = Form(""),
+    cargo: str = Form(...),
+    senha: str = Form(...),
+
+    db: Session = Depends(get_db)
+):
+
+    # Verifica se quem está cadastrando é administrador
+    usuario_logado = verificar_admin(usuario_id, db)
+
+    if not usuario_logado:
+        return RedirectResponse(
+            "/login",
+            status_code=302
+        )
+
+    # Verifica email
+    usuario_email = db.query(User).filter(
+        User.email == email
+    ).first()
+
+    if usuario_email:
+
+        return RedirectResponse(
+            "/admin/administradores",
+            status_code=302
+        )
+
+    # Verifica CPF
+    if cpf:
+
+        usuario_cpf = db.query(User).filter(
+            User.cpf == cpf
+        ).first()
+
+        if usuario_cpf:
+
+            return RedirectResponse(
+                "/admin/administradores",
+                status_code=302
+            )
+
+    # Criptografa senha
+    senha_hash = hash_senha(senha)
+
+    novo = User(
+
+        nome=nome,
+
+        email=email,
+
+        telefone=telefone,
+
+        cpf=cpf,
+
+        senha=senha_hash,
+
+        cargo=cargo,
+
+        is_admin=True,
+
+        is_superadmin=False
+
+    )
+
+    db.add(novo)
+
+    db.commit()
+
+    return RedirectResponse(
+        "/admin/administradores",
+        status_code=303
     )
