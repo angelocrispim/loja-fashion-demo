@@ -1,0 +1,66 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<h1>Administradores</h1>
+
+<table class="table table-striped">
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Status</th>
+            <th>Ações</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for usuario in usuarios %}
+
+        <tr>
+
+            <td>{{ usuario.id }}</td>
+
+            <td>{{ usuario.nome }}</td>
+
+            <td>{{ usuario.email }}</td>
+
+            <td>{{ usuario.cargo }}</td>
+
+            <td>
+
+                <span class="badge bg-success">
+                    Ativo
+                </span>
+
+            </td>
+
+            <td>
+
+                <button class="btn btn-primary btn-sm">
+                    Editar
+                </button>
+
+                <button class="btn btn-warning btn-sm">
+                    Permissões
+                </button>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

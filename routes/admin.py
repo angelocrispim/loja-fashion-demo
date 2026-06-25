@@ -729,3 +729,31 @@ def criar_campo_cargo(db: Session = Depends(get_db)):
     db.commit()
 
     return {"msg": "Campo cargo criado com sucesso"}
+
+# ====================================
+# ADMINISTRADORES
+# ====================================
+
+@router.get("/admin/administradores")
+def administradores(
+    request: Request,
+    db: Session =Depends(get_db)
+):
+
+    administradores = (
+        db.query(User)
+        .filter(
+            User.cargo.in_(
+                ["admin", "superadmin"]
+            )
+        )
+        .all()
+    )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="admin/administradores.html",
+        context={
+            "usuarios": administradores
+        }
+    )
