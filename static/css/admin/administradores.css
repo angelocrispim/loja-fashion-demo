@@ -1,0 +1,240 @@
+/* =====================================
+   CABEÇALHO DA PÁGINA
+===================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-title h1{
+
+    font-size:30px;
+
+    color:#222;
+
+    margin-bottom:8px;
+
+}
+
+.page-title p{
+
+    color:#777;
+
+}
+
+
+/* =====================================
+   FILTROS
+===================================== */
+
+.page-actions{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.filters{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.filters select{
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+}
+
+
+/* =====================================
+   TABELA
+===================================== */
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+.avatar-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.avatar-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.avatar-info strong{
+
+    font-size:15px;
+
+}
+
+.avatar-info span{
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================
+   STATUS
+===================================== */
+
+.status{
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-size:13px;
+
+}
+
+.status.active{
+
+    background:#28a745;
+
+}
+
+.status.blocked{
+
+    background:#dc3545;
+
+}
+
+
+/* =====================================
+   BOTÕES
+===================================== */
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.actions button{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.actions button:hover{
+
+    transform:scale(1.08);
+
+}
+
+.edit{
+
+    background:#0d6efd;
+
+    color:white;
+
+}
+
+.password{
+
+    background:#ffc107;
+
+}
+
+.delete{
+
+    background:#dc3545;
+
+    color:white;
+
+}
+
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media(max-width:900px){
+
+.page-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.page-actions{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+.filters{
+
+    width:100%;
+
+}
+
+.search-box{
+
+    width:100%;
+
+}
+
+}

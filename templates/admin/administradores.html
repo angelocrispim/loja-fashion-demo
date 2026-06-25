@@ -2,6 +2,16 @@
 
 {% block content %}
 
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/administradores.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='/css/admin/components.css') }}">
+
+{% endblock %}
+
 <h1>Administradores</h1>
 
 <table class="table table-striped">
