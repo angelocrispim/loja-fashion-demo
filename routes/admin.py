@@ -737,8 +737,20 @@ def criar_campo_cargo(db: Session = Depends(get_db)):
 @router.get("/admin/administradores")
 def administradores(
     request: Request,
-    db: Session =Depends(get_db)
+    usuario_id: str = Cookie(None),
+    db: Session = Depends(get_db)
 ):
+
+    usuario = verificar_admin(
+        usuario_id,
+        db
+    )
+
+    if not usuario:
+        return RedirectResponse(
+            "/login",
+            status_code=302
+        )
 
     administradores = (
         db.query(User)
@@ -754,6 +766,7 @@ def administradores(
         request=request,
         name="admin/administradores.html",
         context={
+            "usuario": usuario,
             "usuarios": administradores
         }
     )
