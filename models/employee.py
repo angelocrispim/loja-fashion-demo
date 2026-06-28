@@ -4,6 +4,8 @@ from sqlalchemy import String
 from sqlalchemy import Float
 from sqlalchemy import Date
 
+from models.user import User
+
 from database import Base
 
 

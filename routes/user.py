@@ -246,12 +246,57 @@ def login(
             }
         )
 
-    if usuario.is_admin:
+    # SUPER ADMIN
+    if usuario.is_superadmin:
+
         response = RedirectResponse(
             url="/admin",
             status_code=302
         )
+
+    # ADMINISTRADOR
+    elif usuario.cargo == "Administrador":
+
+        response = RedirectResponse(
+            url="/admin",
+            status_code=302
+        )
+
+    # GERENTE
+    elif usuario.cargo == "Gerente":
+
+        response = RedirectResponse(
+            url="/admin",
+            status_code=302
+        )
+
+    # CAIXA
+    elif usuario.cargo == "Caixa":
+
+        response = RedirectResponse(
+            url="/caixa",
+            status_code=302
+        )
+
+    # VENDEDOR
+    elif usuario.cargo == "Vendedor":
+
+        response = RedirectResponse(
+            url="/vendas",
+            status_code=302
+        )
+
+    # ESTOQUISTA
+    elif usuario.cargo == "Estoquista":
+
+        response = RedirectResponse(
+            url="/estoque",
+            status_code=302
+        )
+
+    # CLIENTE
     else:
+
         response = RedirectResponse(
             url=next_url,
             status_code=302

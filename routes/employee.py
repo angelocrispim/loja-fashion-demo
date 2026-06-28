@@ -6,6 +6,8 @@ from fastapi import Cookie
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
+from utils.security import hash_senha
+
 from sqlalchemy.orm import Session
 
 from database import SessionLocal
@@ -77,24 +79,75 @@ def cadastrar_funcionario(
         .replace(",", ".")
     )
 
-    funcionario = Employee(
+    # Criptografa a senha
+    senha_hash = hash_senha(senha)
+
+    # Verifica e-mail
+    usuario_email = db.query(User).filter(
+        User.email == email
+    ).first()
+
+    if usuario_email:
+        return RedirectResponse(
+            "/admin/funcionarios",
+            status_code=302
+        )
+
+    # Verifica CPF
+    usuario_cpf = db.query(User).filter(
+        User.cpf == cpf
+    ).first()
+
+    if usuario_cpf:
+        return RedirectResponse(
+            "/admin/funcionarios",
+            status_code=302
+        )
+
+    # Define quem é administrador
+    is_admin = cargo in ["Administrador", "Gerente"]
+
+    novo_usuario = User(
         nome=nome,
-        matricula=matricula,
         email=email,
+        senha=senha_hash,
         telefone=telefone,
         cpf=cpf,
-        senha=senha,
         cargo=cargo,
-        salario=float(salario_convertido)
+        is_admin=is_admin,
+        is_superadmin=False
     )
+    try:
+        db.add(novo_usuario)
 
-    db.add(funcionario)
+        funcionario = Employee(
+            nome=nome,
+            matricula=matricula,
+            email=email,
+            telefone=telefone,
+            cpf=cpf,
+            senha=senha_hash,
+            cargo=cargo,
+            salario=float(salario_convertido)
+        )
 
-    db.commit()
+        db.add(funcionario)
+
+        db.commit()
+        
+        db.refresh(novo_usuario)
+
+    except Exception as e:
+
+        db.rollback()
+        
+        print("ERRO AO CADASTRAR FUNCIONÁRIO:", e)
+
+        raise
 
     return RedirectResponse(
         url="/admin/funcionarios",
-        status_code=302
+        status_code=303
     )
 # =========================================
 # PÁGINA EDITAR FUNCIONÁRIO
