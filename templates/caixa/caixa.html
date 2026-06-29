@@ -369,6 +369,72 @@
 
 </div>
 
+<!-- ==========================
+        MODAL PIX CAIXA
+=========================== -->
+
+<div id="modalPix" class="modal-pix">
+
+    <div class="pix-container">
+
+        <h2>Pagamento via PIX</h2>
+
+        <div class="pix-total">
+
+            <small>Total da Venda</small>
+
+            <h1 id="valorPix">
+
+                R$ 0,00
+
+            </h1>
+
+        </div>
+
+        <div class="pix-qrcode">
+
+            <img
+                src="{{ qr_code }}"
+                id="imagemPix">
+
+        </div>
+
+        <div class="pix-status">
+
+            <div class="loader"></div>
+
+            <span id="textoStatus">
+
+                Aguardando pagamento...
+
+            </span>
+
+        </div>
+
+        <div class="pix-tempo">
+
+            Tempo restante
+
+            <strong id="tempoPix">
+
+                05:00
+
+            </strong>
+
+        </div>
+
+        <button
+            class="btn-cancelar-pix"
+            onclick="fecharPix()">
+
+            Cancelar
+
+        </button>
+
+    </div>
+
+</div>
+
 <script>
 
 let produtos = []
