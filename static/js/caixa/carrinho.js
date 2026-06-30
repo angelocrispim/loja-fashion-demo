@@ -24,7 +24,7 @@
 function adicionarProduto(produto){
 
     // Procura se o produto já existe no carrinho
-    const existente = Caixa.produtos.find(
+    const existente = PDV.carrinho.produtos.find(
 
         p => p.id === produto.id
 
@@ -40,7 +40,7 @@ function adicionarProduto(produto){
     // Se não existe adiciona
     else{
 
-        Caixa.produtos.push({
+        PDV.carrinho.produtos.push({
 
             id: produto.id,
 
@@ -300,6 +300,8 @@ EventBus.on(
     "produtoLido",
 
     (produto)=>{
+
+        console.log("Evento recebido:", produto);
 
         adicionarProduto(produto);
 
