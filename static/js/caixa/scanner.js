@@ -69,9 +69,11 @@ const Scanner = {
 
             const produto = await resposta.json();
 
-            console.log("Produto recebido:", produto);
+            console.table(produto);
 
             console.log("Disparando evento produtoLido...");
+
+            console.log("Emitindo evento...");
 
             EventBus.emit(
                 "produtoLido",
@@ -94,10 +96,11 @@ const Scanner = {
 
        catch(error){
 
+            console.error("========== ERRO SCANNER ==========");
             console.error(error);
+            console.error(error.stack);
 
-            throw error;
-
+            alert("Veja o Console (F12)");
         }
 
     }
