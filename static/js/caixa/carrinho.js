@@ -21,6 +21,10 @@
 // ADICIONAR PRODUTO
 // ========================================
 
+console.log("VERSÃO NOVA DO CARRINHO");
+
+console.log(PDV);
+
 function adicionarProduto(produto){
 
     // Procura se o produto já existe no carrinho
