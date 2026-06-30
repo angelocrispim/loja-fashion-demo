@@ -92,11 +92,11 @@ const Scanner = {
 
         }
 
-        catch(error){
+       catch(error){
 
-            console.error("ERRO COMPLETO:", error);
+            console.error(error);
 
-            alert("Veja o Console (F12)");
+            throw error;
 
         }
 
