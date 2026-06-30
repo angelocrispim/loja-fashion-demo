@@ -297,11 +297,9 @@ function tocarBeep(){
 
 EventBus.on(
 
-    "produtoLido",
+    Eventos.PRODUTO_LIDO,
 
     (produto)=>{
-
-        console.log("Evento recebido:", produto);
 
         adicionarProduto(produto);
 

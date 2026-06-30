@@ -79,6 +79,10 @@ document.addEventListener(
 
         Scanner.iniciar();
 
+        Pix.iniciar();
+
+        Pagamento.iniciar();
+
     }
 
 );

@@ -76,7 +76,7 @@ const Scanner = {
             console.log("Emitindo evento...");
 
             EventBus.emit(
-                "produtoLido",
+                Eventos.PRODUTO_LIDO,
                 produto
             );
 
