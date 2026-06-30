@@ -1,0 +1,59 @@
+.btn-qtd{
+
+    width:30px;
+
+    height:30px;
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    background:#1976d2;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+.btn-qtd:hover{
+
+    background:#125aa0;
+
+}
+
+.qtd-produto{
+
+    display:inline-block;
+
+    width:35px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+}
+
+.btn-remover{
+
+    border:none;
+
+    background:#d32f2f;
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.btn-remover:hover{
+
+    background:#a50000;
+
+}

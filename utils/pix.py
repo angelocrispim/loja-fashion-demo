@@ -1,25 +1,21 @@
 import qrcode
-import uuid
 from pathlib import Path
+import uuid
 
 
-def gerar_qrcode_pix(valor: float):
+def gerar_qrcode(valor: float):
 
     codigo = f"""
-    LOJA FASHION
-    PIX DEMONSTRAÇÃO
+LOJA FASHION
+PIX DEMONSTRAÇÃO
 
-    VALOR:{valor:.2f}
+VALOR:{valor:.2f}
 
-    TRANSACAO:{uuid.uuid4()}
-    """
+TRANSACAO:{uuid.uuid4()}
+"""
 
     pasta = Path("static/img/pix")
-
-    pasta.mkdir(
-        parents=True,
-        exist_ok=True
-    )
+    pasta.mkdir(parents=True, exist_ok=True)
 
     caminho = pasta / "pix_atual.png"
 
@@ -30,7 +26,6 @@ def gerar_qrcode_pix(valor: float):
     )
 
     qr.add_data(codigo)
-
     qr.make(fit=True)
 
     imagem = qr.make_image(

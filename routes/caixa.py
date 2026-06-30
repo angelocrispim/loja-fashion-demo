@@ -23,6 +23,8 @@ from models.cash_closing import CashClosing
 from models.cash_flow import CashFlow
 from models.user import User
 
+from utils.pix import gerar_qrcode
+
 
 templates = Jinja2Templates(
     directory="templates"
@@ -368,3 +370,23 @@ def detalhes_venda(
             "funcionario": venda.funcionario
         }
     )
+    
+#################################
+# GERAR PIX
+#################################
+    
+@router.post("/caixa/gerar-pix")
+def gerar_pix(
+    dados: dict = Body(...)
+):
+
+    total = float(dados["total"])
+
+    imagem = gerar_qrcode(total)
+
+    return {
+        "success": True,
+        "imagem": imagem,
+        "valor": total,
+        "status": "aguardando"
+    }
