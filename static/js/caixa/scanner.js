@@ -69,16 +69,22 @@ const Scanner = {
 
             const produto = await resposta.json();
 
+            console.log("Produto recebido:", produto);
+
             console.table(produto);
 
             console.log("Disparando evento produtoLido...");
 
             console.log("Emitindo evento...");
 
+            console.log("Emitindo produtoLido...");
+
             EventBus.emit(
                 Eventos.PRODUTO_LIDO,
                 produto
             );
+
+            console.log("Evento emitido com sucesso.");
 
             tocarBeep();
 
@@ -94,13 +100,23 @@ const Scanner = {
 
         }
 
-       catch(error){
+       //catch(error){
 
-            console.error("========== ERRO SCANNER ==========");
+        //    console.error("========== ERRO SCANNER ==========");
+        //    console.error(error);
+        //    console.error(error.stack);
+
+        //    alert("Veja o Console (F12)");
+        //}
+
+        catch(error){
+
+            console.error("========= ERRO =========");
             console.error(error);
             console.error(error.stack);
 
-            alert("Veja o Console (F12)");
+            alert(error.message);
+
         }
 
     }
