@@ -69,6 +69,8 @@ const Scanner = {
 
             const produto = await resposta.json();
 
+            console.log("PRODUTO:", produto);
+
             console.log("Produto recebido:", produto);
 
             console.table(produto);
@@ -83,6 +85,8 @@ const Scanner = {
                 Eventos.PRODUTO_LIDO,
                 produto
             );
+
+            console.log("EVENTO ENVIADO");
 
             console.log("Evento emitido com sucesso.");
 

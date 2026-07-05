@@ -21,11 +21,16 @@
 // ADICIONAR PRODUTO
 // ========================================
 
+console.log("CARRINHO NOVO CARREGADO");
+//console.log("Arquivo:", import.meta);
+
 console.log("VERSÃO NOVA DO CARRINHO");
 
 console.log(PDV);
 
 function adicionarProduto(produto){
+
+    console.log("ADICIONAR PRODUTO NOVO");
 
     // Procura se o produto já existe no carrinho
     const existente = PDV.carrinho.produtos.find(
@@ -68,7 +73,11 @@ function adicionarProduto(produto){
 
     renderizarCarrinho();
 
+    
+
 }
+
+
 
 // ========================================
 // CALCULAR TOTAL
