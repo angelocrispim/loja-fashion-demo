@@ -30,6 +30,9 @@ console.log(PDV);
 
 function adicionarProduto(produto){
 
+    console.log("ENTROU NO adicionarProduto");
+    console.log(produto);
+
     console.log("ADICIONAR PRODUTO NOVO");
 
     // Procura se o produto já existe no carrinho
