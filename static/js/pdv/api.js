@@ -1,33 +1,65 @@
 // ==============================================
 // LOJA FASHION PDV
 // API
+// Comunicação com o FastAPI
+// Versão: 2.0
 // ==============================================
 
 const API = {
 
     iniciar(){
 
-        Logger.info(
+        Logger.sucesso(
 
             "API iniciada."
 
         );
 
+         Developer.registrarModulo(
+
+            "API"
+
+        );
+
     },
 
-    async buscarProduto(codigo){
+    // ==========================================
+    // Monta a URL completa da API
+    // ==========================================
+
+    url(endpoint){
+
+        return `${CONFIG.api.baseURL}${endpoint}`;
+
+    },
+
+    // ==========================================
+    // Método genérico para requisições
+    // ==========================================
+
+    async request(endpoint, options = {}){
 
         try{
 
             Logger.info(
 
-                `Buscando produto ${codigo}`
+                `Requisição: ${endpoint}`
+
+            );
+
+            Developer.registrarEvento(
+
+                "API",
+
+                endpoint
 
             );
 
             const resposta = await fetch(
 
-                `/produto/codigo/${codigo}`
+                this.url(endpoint),
+
+                options
 
             );
 
@@ -35,17 +67,49 @@ const API = {
 
                 throw new Error(
 
-                    "Produto não encontrado."
+                    `Erro HTTP ${resposta.status}`
 
                 );
 
             }
 
-            const produto = await resposta.json();
+            return await resposta.json();
 
-            Logger.sucesso(
+        }
 
-                `Produto encontrado: ${produto.nome}`
+        catch(erro){
+
+            Logger.erro(
+
+                erro.message
+
+            );
+
+            Developer.registrarEvento(
+
+                "API",
+
+                erro.message
+
+            );
+
+            throw erro;
+
+        }
+
+    },
+
+    // ==========================================
+    // Buscar Produto
+    // ==========================================
+
+    async buscarProduto(codigo){
+
+        try{
+
+            const produto = await this.request(
+
+                `/produto/codigo/${codigo}`
 
             );
 
@@ -63,19 +127,13 @@ const API = {
 
         catch(erro){
 
-            Logger.erro(
+            return{
 
-                erro.message
+                sucesso:false,
 
-            );
+                dados:null,
 
-            return {
-
-                sucesso: false,
-
-                dados: null,
-
-                mensagem: erro.message
+                mensagem:erro.message
 
             };
 

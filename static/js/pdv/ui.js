@@ -9,18 +9,20 @@ const UI = {
 
     total: null,
 
+    quantidade: null,
+
     iniciar(){
 
         this.tabela = document.getElementById(
-
             "tabela_produtos"
-
         );
 
         this.total = document.getElementById(
-
             "valor_total"
+        );
 
+        this.quantidade = document.getElementById(
+            "quantidade_itens"
         );
 
         EventBus.on(
@@ -37,21 +39,21 @@ const UI = {
 
         );
 
+        Developer.registrarModulo(
+
+            "UI"
+
+        );
+
     },
 
     renderizar(carrinho){
 
-        this.renderizarProdutos(
+        this.renderizarProdutos(carrinho);
 
-            carrinho
+        this.renderizarTotal(carrinho);
 
-        );
-
-        this.renderizarTotal(
-
-            carrinho
-
-        );
+        this.renderizarQuantidade(carrinho);
 
     },
 
@@ -61,11 +63,7 @@ const UI = {
 
         carrinho.produtos.forEach(produto=>{
 
-            const linha = document.createElement(
-
-                "tr"
-
-            );
+            const linha = document.createElement("tr");
 
             linha.innerHTML = `
 
@@ -75,25 +73,13 @@ const UI = {
 
                 <td>${produto.quantidade}</td>
 
-                <td>
+                <td>R$ ${produto.preco.toFixed(2)}</td>
 
-                    R$ ${produto.preco.toFixed(2)}
-
-                </td>
-
-                <td>
-
-                    R$ ${(produto.preco * produto.quantidade).toFixed(2)}
-
-                </td>
+                <td>R$ ${(produto.preco * produto.quantidade).toFixed(2)}</td>
 
             `;
 
-            this.tabela.appendChild(
-
-                linha
-
-            );
+            this.tabela.appendChild(linha);
 
         });
 
@@ -104,6 +90,18 @@ const UI = {
         this.total.innerHTML =
 
             `R$ ${carrinho.total.toFixed(2)}`;
+
+    },
+
+    renderizarQuantidade(carrinho){
+
+        if(this.quantidade){
+
+            this.quantidade.innerHTML =
+
+                carrinho.quantidadeItens;
+
+        }
 
     }
 

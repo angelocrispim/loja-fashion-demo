@@ -1,16 +1,20 @@
 // ==============================================
 // LOJA FASHION PDV
-// Inicialização
+// Inicialização da Aplicação
 // ==============================================
 
 const App = {
 
     iniciar(){
 
+        // Diagnóstico do sistema
         Health.verificar();
 
+        // Inicializa o modo desenvolvedor
+        Developer.iniciar();
+
         Logger.info("================================");
-        Logger.info("LOJA FASHION PDV");
+        Logger.info(CONFIG.sistema.nome);
         Logger.info(`Versão ${CONFIG.sistema.versao}`);
         Logger.info("Inicializando...");
         Logger.info("================================");
@@ -22,6 +26,14 @@ const App = {
         EventBus.emit(
 
             Eventos.SISTEMA_INICIADO
+
+        );
+
+        Developer.registrarEvento(
+
+            "Sistema",
+
+            "PDV iniciado"
 
         );
 
@@ -71,19 +83,55 @@ const App = {
 
         }
 
+        if(typeof Developer === "undefined"){
+
+            throw new Error("Developer não encontrado.");
+
+        }
+
     },
 
     iniciarModulos(){
 
         EventBus.iniciar();
 
+        Developer.registrarModulo(
+
+            "EventBus"
+
+        );
+
         API.iniciar();
+
+        Developer.registrarModulo(
+
+            "API"
+
+        );
 
         Scanner.iniciar();
 
+        Developer.registrarModulo(
+
+            "Scanner"
+
+        );
+
         Carrinho.iniciar();
 
+        Developer.registrarModulo(
+
+            "Carrinho"
+
+        );
+
         UI.iniciar();
+
+        Developer.registrarModulo(
+
+            "UI"
+
+        );
 
     }
 

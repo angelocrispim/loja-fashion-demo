@@ -1,7 +1,6 @@
 // ==============================================
 // LOJA FASHION PDV
 // Configurações do Sistema
-// Versão: 2.0
 // ==============================================
 
 const CONFIG = {
@@ -25,6 +24,8 @@ const CONFIG = {
     },
 
     api: {
+
+        baseURL: "",
 
         timeout: 10000
 

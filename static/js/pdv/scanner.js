@@ -36,6 +36,10 @@ const Scanner = {
             "Scanner iniciado."
         );
 
+        Developer.registrarModulo(
+            "Scanner"
+        );
+
     },
 
     async lerCodigo(event){
@@ -68,45 +72,91 @@ const Scanner = {
 
         );
 
-        const resposta = await API.buscarProduto(
-            codigo
+        Developer.registrarEvento(
+
+            "Scanner",
+
+            `Código: ${codigo}`
+
         );
 
-        CONFIG.scanner.bloquearLeitura = false;
+        try{
 
-        if(!resposta.sucesso){
+            const resposta = await API.buscarProduto(
+                codigo
+            );
 
-            Logger.alerta(
+            if(!resposta.sucesso){
 
-                resposta.mensagem
+                Logger.alerta(
+                    resposta.mensagem
+                );
+
+                alert(
+                    resposta.mensagem
+                );
+
+                return;
+
+            }
+
+            Logger.sucesso(
+
+                `Produto encontrado: ${resposta.dados.nome}`
 
             );
 
-            alert(
-                resposta.mensagem
+            Developer.registrarEvento(
+
+                "Scanner",
+
+                `Produto encontrado: ${resposta.dados.nome}`
+
             );
+
+            EventBus.emit(
+
+                Eventos.PRODUTO_LIDO,
+
+                resposta.dados
+
+            );
+
+            if(CONFIG.scanner.beep){
+
+                this.tocarBeep();
+
+            }
+
+        }
+
+        catch(erro){
+
+            Logger.erro(
+
+                erro.message
+
+            );
+
+            Developer.registrarEvento(
+
+                "Scanner",
+
+                `Erro: ${erro.message}`
+
+            );
+
+        }
+
+        finally{
+
+            CONFIG.scanner.bloquearLeitura = false;
 
             this.input.value = "";
 
             this.input.focus();
 
-            return;
-
         }
-
-        EventBus.emit(
-
-            Eventos.PRODUTO_LIDO,
-
-            resposta.dados
-
-        );
-
-        this.tocarBeep();
-
-        this.input.value = "";
-
-        this.input.focus();
 
     },
 

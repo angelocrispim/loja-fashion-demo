@@ -14,6 +14,13 @@ const Carrinho = {
 
         );
 
+        Developer.registrarModulo(
+
+            "Carrinho"
+
+        );
+
+
         EventBus.on(
 
             Eventos.PRODUTO_LIDO,
@@ -26,11 +33,19 @@ const Carrinho = {
 
     adicionarProduto(produto){
 
-        Logger.info(
+        Developer.registrarEvento(
 
-            `Adicionando: ${produto.nome}`
+            "Carrinho",
+
+            `Adicionar ${produto.nome}`
 
         );
+
+        //Logger.info(
+
+            //`Adicionando: ${produto.nome}`
+
+        //);
 
         const existente = PDV.carrinho.produtos.find(
 
@@ -67,6 +82,14 @@ const Carrinho = {
     },
 
     recalcularCarrinho(){
+
+        Developer.registrarEvento(
+
+            "Carrinho",
+
+            "Carrinho recalculado"
+
+        );
 
         let subtotal = 0;
 
@@ -107,6 +130,14 @@ const Carrinho = {
     },
 
     limpar(){
+
+        Developer.registrarEvento(
+
+            "Carrinho",
+
+            "Venda cancelada"
+
+        );
 
         PDV.limparVenda();
 
