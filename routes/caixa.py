@@ -130,6 +130,26 @@ def tela_caixa(
             "usuario": funcionario
         }
     )
+    
+@router.get("/pdv", response_class=HTMLResponse)
+def pdv(
+    request: Request,
+    usuario=Depends(usuario_logado)
+):
+
+    return templates.TemplateResponse(
+
+        "admin/pdv.html",
+
+        {
+
+            "request": request,
+
+            "usuario": usuario
+
+        }
+
+    )
    
 @router.post("/caixa/finalizar-venda")
 def finalizar_venda(

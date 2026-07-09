@@ -25,7 +25,7 @@ const CONFIG = {
 
     api: {
 
-        baseURL: "",
+        baseURL: "https://loja-fashion-demo.onrender.com",
 
         timeout: 10000
 
