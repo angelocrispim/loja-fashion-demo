@@ -131,24 +131,37 @@ def tela_caixa(
         }
     )
     
-@router.get("/pdv", response_class=HTMLResponse)
-def pdv(
+@router.get("/pdv")
+def tela_pdv(
     request: Request,
-    usuario=Depends(usuario_logado)
+    operador_caixa: str = Cookie(None),
+    db: Session = Depends(get_db)
 ):
 
+    if not operador_caixa:
+
+        return RedirectResponse(
+            url="/caixa/login",
+            status_code=302
+        )
+
+    funcionario = db.query(Employee).filter(
+        Employee.id == int(operador_caixa)
+    ).first()
+
+    if not funcionario:
+
+        return RedirectResponse(
+            url="/caixa/login",
+            status_code=302
+        )
+
     return templates.TemplateResponse(
-
-        "admin/pdv.html",
-
-        {
-
-            "request": request,
-
-            "usuario": usuario
-
+        request=request,
+        name="pdv/pdv.html",
+        context={
+            "usuario": funcionario
         }
-
     )
    
 @router.post("/caixa/finalizar-venda")
