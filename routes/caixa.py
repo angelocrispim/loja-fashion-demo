@@ -32,6 +32,8 @@ templates = Jinja2Templates(
 
 router = APIRouter()
 
+print(">>>>>>>>>> CAIXA.PY CARREGADO <<<<<<<<<<")
+
 
 def get_db():
 
