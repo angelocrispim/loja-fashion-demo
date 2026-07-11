@@ -82,4 +82,3 @@ app.include_router(caixa.router)
 
 app.include_router(caixa_router)
 
-app.include_router(pdv_router)
