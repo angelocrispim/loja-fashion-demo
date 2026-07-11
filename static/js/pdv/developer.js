@@ -7,6 +7,8 @@ const Developer = {
 
     modulos: [],
 
+    eventos: [],
+
     iniciar(){
 
         if(!CONFIG.sistema.developerMode){
@@ -35,7 +37,7 @@ const Developer = {
 
             nome,
 
-            horario: new Date()
+            horario:new Date()
 
         });
 
@@ -47,11 +49,47 @@ const Developer = {
 
     },
 
+    registrarEvento(modulo, descricao){
+
+        if(!CONFIG.sistema.developerMode){
+
+            return;
+
+        }
+
+        this.eventos.push({
+
+            modulo,
+
+            descricao,
+
+            horario:new Date()
+
+        });
+
+        console.log(
+
+            `📌 ${modulo}: ${descricao}`
+
+        );
+
+    },
+
     listarModulos(){
 
         console.table(
 
             this.modulos
+
+        );
+
+    },
+
+    listarEventos(){
+
+        console.table(
+
+            this.eventos
 
         );
 

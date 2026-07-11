@@ -45,6 +45,12 @@ const UI = {
 
         );
 
+        this.renderizar(
+
+            PDV.carrinho
+
+        );
+
     },
 
     renderizar(carrinho){

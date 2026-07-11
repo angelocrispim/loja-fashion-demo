@@ -1,9 +1,8 @@
-// ==============================================
-// LOJA FASHION PDV
-// Eventos do Sistema
-// ==============================================
-
 const Eventos = {
+
+    SISTEMA_INICIADO:
+
+        "sistemaIniciado",
 
     PRODUTO_LIDO:
 
@@ -20,6 +19,10 @@ const Eventos = {
     QUANTIDADE_ALTERADA:
 
         "quantidadeAlterada",
+
+    CARRINHO_ATUALIZADO:
+
+        "carrinhoAtualizado",
 
     TOTAL_ATUALIZADO:
 
