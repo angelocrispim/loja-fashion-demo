@@ -1,14 +1,122 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Novo PDV</title>
+
+    <title>PDV</title>
+
 </head>
+
 <body>
 
-<h1>NOVO PDV FUNCIONANDO 🚀</h1>
+<h1>CAIXA PDV</h1>
 
-<p>Operador: {{ usuario.nome }}</p>
+<p>
+
+Operador:
+
+<strong>{{ usuario.nome }}</strong>
+
+</p>
+
+<input
+    id="codigo_produto"
+    type="text"
+    placeholder="Código de barras"
+    autofocus>
+
+<br><br>
+
+<table border="1" width="100%">
+
+    <thead>
+
+        <tr>
+
+            <th>Código</th>
+
+            <th>Produto</th>
+
+            <th>Qtd</th>
+
+            <th>Valor</th>
+
+            <th>Total</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody id="tabela_produtos">
+
+    </tbody>
+
+</table>
+
+<br>
+
+<h2>
+
+TOTAL:
+
+<span id="valor_total">
+
+R$ 0,00
+
+</span>
+
+</h2>
+
+<select id="forma_pagamento">
+
+    <option>Dinheiro</option>
+
+    <option>PIX</option>
+
+    <option>Débito</option>
+
+    <option>Crédito</option>
+
+</select>
+
+<br><br>
+
+<button onclick="Venda.finalizar()">
+
+FINALIZAR VENDA
+
+</button>
+
+<button onclick="Venda.cancelar()">
+
+CANCELAR
+
+</button>
+
+<script>
+
+PDV.operador.id={{usuario.id}};
+
+PDV.operador.nome="{{usuario.nome}}";
+
+</script>
+
+<script src="/static/js/pdv/config.js"></script>
+<script src="/static/js/pdv/state.js"></script>
+<script src="/static/js/pdv/constants.js"></script>
+<script src="/static/js/pdv/eventBus.js"></script>
+<script src="/static/js/pdv/logger.js"></script>
+<script src="/static/js/pdv/developer.js"></script>
+<script src="/static/js/pdv/health.js"></script>
+<script src="/static/js/pdv/api.js"></script>
+<script src="/static/js/pdv/scanner.js"></script>
+<script src="/static/js/pdv/carrinho.js"></script>
+<script src="/static/js/pdv/ui.js"></script>
+<script src="/static/js/pdv/venda.js"></script>
+<script src="/static/js/pdv/app.js"></script>
 
 </body>
+
 </html>

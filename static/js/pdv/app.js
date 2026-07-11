@@ -89,6 +89,12 @@ const App = {
 
         }
 
+        if(typeof Venda === "undefined"){
+
+            throw new Error("Venda não encontrada.");
+
+        }
+
     },
 
     iniciarModulos(){
@@ -130,6 +136,14 @@ const App = {
         Developer.registrarModulo(
 
             "UI"
+
+        );
+
+        Venda.iniciar();
+
+        Developer.registrarModulo(
+
+            "Venda"
 
         );
 
