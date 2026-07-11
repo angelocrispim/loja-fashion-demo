@@ -28,7 +28,7 @@ from routes.finance import router as finance_router
 from routes.cash_register import router as cash_register_router
 from routes import caixa
 from routes.caixa import router as caixa_router
-from routes.pdv import router as pdv_router
+
 
 from routes.employee import router as employee_router
 
