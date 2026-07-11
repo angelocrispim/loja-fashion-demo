@@ -1,124 +1,239 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <title>PDV</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Loja Fashion PDV</title>
+
+    <link rel="stylesheet"
+          href="/static/css/pdv.css">
 
 </head>
 
 <body>
 
-<h1>CAIXA PDV</h1>
+    <!-- ========================= -->
+    <!-- CABEÇALHO -->
+    <!-- ========================= -->
 
-<p>
+    <header class="header">
 
-Operador:
+        <div>
 
-<strong>{{ usuario.nome }}</strong>
+            <h1>LOJA FASHION PDV</h1>
 
-</p>
+            <small>
 
-<input
-    id="codigo_produto"
-    type="text"
-    placeholder="Código de barras"
-    autofocus>
+                Versão 2.0
 
-<br><br>
+            </small>
 
-<table border="1" width="100%">
+        </div>
 
-    <thead>
+        <div class="operador">
 
-        <tr>
+            Operador:
 
-            <th>Código</th>
+            <strong>
 
-            <th>Produto</th>
+                {{ usuario.nome }}
 
-            <th>Qtd</th>
+            </strong>
 
-            <th>Valor</th>
+        </div>
 
-            <th>Total</th>
-
-        </tr>
-
-    </thead>
-
-    <tbody id="tabela_produtos">
-
-    </tbody>
-
-</table>
-
-<br>
-
-<h2>
-
-TOTAL:
-
-<span id="valor_total">
-
-R$ 0,00
-
-</span>
-
-</h2>
-
-<select id="forma_pagamento">
-
-    <option>Dinheiro</option>
-
-    <option>PIX</option>
-
-    <option>Débito</option>
-
-    <option>Crédito</option>
-
-</select>
-
-<br><br>
-
-<button onclick="Venda.finalizar()">
-
-FINALIZAR VENDA
-
-</button>
-
-<button onclick="Venda.cancelar()">
-
-CANCELAR
-
-</button>
+    </header>
 
 
+    <!-- ========================= -->
+    <!-- SCANNER -->
+    <!-- ========================= -->
 
-<script src="/static/js/pdv/config.js"></script>
-<script src="/static/js/pdv/state.js"></script>
+    <section class="scanner">
 
-<script>
+        <input
 
-PDV.operador.id={{usuario.id}};
+            id="codigo_produto"
 
-PDV.operador.nome="{{usuario.nome}}";
+            type="text"
 
-</script>
+            placeholder="Digite ou passe o código de barras"
 
-<script src="/static/js/pdv/events.js"></script>
-<script src="/static/js/pdv/EventBus.js"></script>
-<script src="/static/js/pdv/logger.js"></script>
-<script src="/static/js/pdv/developer.js"></script>
-<script src="/static/js/pdv/health.js"></script>
-<script src="/static/js/pdv/api.js"></script>
-<script src="/static/js/pdv/scanner.js"></script>
-<script src="/static/js/pdv/carrinho.js"></script>
-<script src="/static/js/pdv/ui.js"></script>
-<script src="/static/js/pdv/vendas.js"></script>
-<script src="/static/js/pdv/app.js"></script>
+            autocomplete="off"
+
+            autofocus
+
+        >
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- CONTEÚDO -->
+    <!-- ========================= -->
+
+    <main class="conteudo">
+
+        <!-- PRODUTOS -->
+
+        <section class="produtos">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Código</th>
+
+                        <th>Produto</th>
+
+                        <th>Qtd</th>
+
+                        <th>Valor</th>
+
+                        <th>Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabela_produtos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- LATERAL -->
+
+        <aside class="painel">
+
+            <h2>Total</h2>
+
+            <div
+                class="valor-total"
+                id="valor_total">
+
+                R$ 0,00
+
+            </div>
+
+            <br>
+
+            <label>
+
+                Forma de Pagamento
+
+            </label>
+
+            <select id="forma_pagamento">
+
+                <option value="Dinheiro">
+
+                    Dinheiro
+
+                </option>
+
+                <option value="PIX">
+
+                    PIX
+
+                </option>
+
+                <option value="Débito">
+
+                    Cartão Débito
+
+                </option>
+
+                <option value="Crédito">
+
+                    Cartão Crédito
+
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <button id="btn_finalizar">
+
+                FINALIZAR VENDA
+
+            </button>
+
+            <button id="btn_cancelar">
+
+                CANCELAR VENDA
+
+            </button>
+
+        </aside>
+
+    </main>
+
+
+    <!-- ========================= -->
+    <!-- RODAPÉ -->
+    <!-- ========================= -->
+
+    <footer>
+
+        Loja Fashion PDV © 2026
+
+    </footer>
+
+
+    <!-- ========================= -->
+    <!-- DADOS DO OPERADOR -->
+    <!-- ========================= -->
+
+    <script src="/static/js/pdv/config.js"></script>
+
+    <script src="/static/js/pdv/state.js"></script>
+
+    <script>
+
+        PDV.operador.id = {{ usuario.id }};
+
+        PDV.operador.nome = "{{ usuario.nome }}";
+
+    </script>
+
+
+    <!-- ========================= -->
+    <!-- MÓDULOS -->
+    <!-- ========================= -->
+
+    <script src="/static/js/pdv/events.js"></script>
+
+    <script src="/static/js/pdv/eventBus.js"></script>
+
+    <script src="/static/js/pdv/logger.js"></script>
+
+    <script src="/static/js/pdv/developer.js"></script>
+
+    <script src="/static/js/pdv/health.js"></script>
+
+    <script src="/static/js/pdv/api.js"></script>
+
+    <script src="/static/js/pdv/scanner.js"></script>
+
+    <script src="/static/js/pdv/carrinho.js"></script>
+
+    <script src="/static/js/pdv/ui.js"></script>
+
+    <script src="/static/js/pdv/venda.js"></script>
+
+    <script src="/static/js/pdv/app.js"></script>
 
 </body>
 

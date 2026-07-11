@@ -1,0 +1,192 @@
+/* ==========================================
+   LOJA FASHION PDV
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#f4f6f9;
+
+    padding:20px;
+
+}
+
+/* Cabeçalho */
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#1f2937;
+
+    color:white;
+
+    padding:15px 25px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+}
+
+.header h1{
+
+    font-size:28px;
+
+}
+
+.operador{
+
+    font-size:16px;
+
+}
+
+/* Scanner */
+
+.scanner{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+#codigo_produto{
+
+    width:100%;
+
+    padding:15px;
+
+    font-size:22px;
+
+    border:2px solid #d1d5db;
+
+    border-radius:6px;
+
+}
+
+/* Produtos */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+thead{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+th{
+
+    padding:14px;
+
+}
+
+td{
+
+    padding:12px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ececec;
+
+}
+
+/* Rodapé */
+
+.footer{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.total{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#059669;
+
+}
+
+.botoes{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+button{
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    padding:14px 24px;
+
+}
+
+/* Botão finalizar */
+
+#btn_finalizar{
+
+    background:#16a34a;
+
+    color:white;
+
+}
+
+/* Botão cancelar */
+
+#btn_cancelar{
+
+    background:#dc2626;
+
+    color:white;
+
+}
+
+button:hover{
+
+    opacity:.9;
+
+}

@@ -15,16 +15,10 @@ const API = {
 
         );
 
-         Developer.registrarModulo(
-
-            "API"
-
-        );
-
     },
 
     // ==========================================
-    // Monta a URL completa da API
+    // Monta a URL da API
     // ==========================================
 
     url(endpoint){
@@ -34,7 +28,7 @@ const API = {
     },
 
     // ==========================================
-    // Método genérico para requisições
+    // Requisição Genérica
     // ==========================================
 
     async request(endpoint, options = {}){
@@ -47,14 +41,6 @@ const API = {
 
             );
 
-            Developer.registrarEvento(
-
-                "API",
-
-                endpoint
-
-            );
-
             const resposta = await fetch(
 
                 this.url(endpoint),
@@ -63,31 +49,29 @@ const API = {
 
             );
 
+            const dados = await resposta.json();
+
             if(!resposta.ok){
 
                 throw new Error(
 
-                    `Erro HTTP ${resposta.status}`
+                    dados.erro ||
+
+                    dados.detail ||
+
+                    "Erro na API."
 
                 );
 
             }
 
-            return await resposta.json();
+            return dados;
 
         }
 
         catch(erro){
 
             Logger.erro(
-
-                erro.message
-
-            );
-
-            Developer.registrarEvento(
-
-                "API",
 
                 erro.message
 
@@ -113,13 +97,11 @@ const API = {
 
             );
 
-            return {
+            return{
 
-                sucesso: true,
+                sucesso:true,
 
-                dados: produto,
-
-                mensagem: null
+                dados:produto
 
             };
 
@@ -131,7 +113,55 @@ const API = {
 
                 sucesso:false,
 
-                dados:null,
+                mensagem:erro.message
+
+            };
+
+        }
+
+    },
+
+    // ==========================================
+    // Finalizar Venda
+    // ==========================================
+
+    async finalizarVenda(dados){
+
+        try{
+
+            const resposta = await this.request(
+
+                "/caixa/finalizar-venda",
+
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":"application/json"
+
+                    },
+
+                    body:JSON.stringify(
+
+                        dados
+
+                    )
+
+                }
+
+            );
+
+            return resposta;
+
+        }
+
+        catch(erro){
+
+            return{
+
+                success:false,
 
                 mensagem:erro.message
 
