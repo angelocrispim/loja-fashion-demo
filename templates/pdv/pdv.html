@@ -17,21 +17,23 @@
 
 <body>
 
+<div class="pdv">
+
     <!-- ========================= -->
-    <!-- CABEÇALHO -->
+    <!-- TOPO -->
     <!-- ========================= -->
 
-    <header class="header">
+    <header class="topo">
 
         <div>
 
-            <h1>LOJA FASHION PDV</h1>
+            <h1>🛒 LOJA FASHION PDV</h1>
 
-            <small>
+            <span>
 
                 Versão 2.0
 
-            </small>
+            </span>
 
         </div>
 
@@ -51,37 +53,37 @@
 
 
     <!-- ========================= -->
-    <!-- SCANNER -->
-    <!-- ========================= -->
-
-    <section class="scanner">
-
-        <input
-
-            id="codigo_produto"
-
-            type="text"
-
-            placeholder="Digite ou passe o código de barras"
-
-            autocomplete="off"
-
-            autofocus
-
-        >
-
-    </section>
-
-
-    <!-- ========================= -->
     <!-- CONTEÚDO -->
     <!-- ========================= -->
 
-    <main class="conteudo">
+    <div class="conteudo">
 
-        <!-- PRODUTOS -->
 
-        <section class="produtos">
+        <!-- ========================= -->
+        <!-- ESQUERDA -->
+        <!-- ========================= -->
+
+        <div class="esquerda">
+
+            <label>
+
+                Código de Barras
+
+            </label>
+
+            <input
+
+                id="codigo_produto"
+
+                type="text"
+
+                placeholder="Passe ou digite o código de barras"
+
+                autocomplete="off"
+
+                autofocus
+
+            >
 
             <table>
 
@@ -109,24 +111,48 @@
 
             </table>
 
-        </section>
+        </div>
 
 
-        <!-- LATERAL -->
+        <!-- ========================= -->
+        <!-- DIREITA -->
+        <!-- ========================= -->
 
-        <aside class="painel">
+        <div class="direita">
 
-            <h2>Total</h2>
+            <div class="card-total">
 
-            <div
-                class="valor-total"
-                id="valor_total">
+                <div>
 
-                R$ 0,00
+                    TOTAL
+
+                </div>
+
+                <h2 id="valor_total">
+
+                    R$ 0,00
+
+                </h2>
 
             </div>
 
-            <br>
+
+            <label>
+
+                Desconto
+
+            </label>
+
+            <input
+
+                id="desconto"
+
+                type="number"
+
+                value="0"
+
+            >
+
 
             <label>
 
@@ -148,13 +174,13 @@
 
                 </option>
 
-                <option value="Débito">
+                <option value="Cartão Débito">
 
                     Cartão Débito
 
                 </option>
 
-                <option value="Crédito">
+                <option value="Cartão Crédito">
 
                     Cartão Crédito
 
@@ -162,78 +188,111 @@
 
             </select>
 
-            <br><br>
 
-            <button id="btn_finalizar">
+            <div class="valor-final">
+
+                Valor Final
+
+                <h2 id="valor_final">
+
+                    R$ 0,00
+
+                </h2>
+
+            </div>
+
+
+            <button
+
+                id="btn_finalizar"
+
+                onclick="Venda.finalizar()"
+
+                class="btn-verde"
+
+            >
 
                 FINALIZAR VENDA
 
             </button>
 
-            <button id="btn_cancelar">
+
+            <button
+
+                id="btn_cancelar"
+
+                onclick="Venda.cancelar()"
+
+                class="btn-vermelho"
+
+            >
 
                 CANCELAR VENDA
 
             </button>
 
-        </aside>
 
-    </main>
+            <button
 
+                id="btn_fechar"
 
-    <!-- ========================= -->
-    <!-- RODAPÉ -->
-    <!-- ========================= -->
+                class="btn-cinza"
 
-    <footer>
+            >
 
-        Loja Fashion PDV © 2026
+                FECHAR CAIXA
 
-    </footer>
+            </button>
 
+        </div>
 
-    <!-- ========================= -->
-    <!-- DADOS DO OPERADOR -->
-    <!-- ========================= -->
+    </div>
 
-    <script src="/static/js/pdv/config.js"></script>
-
-    <script src="/static/js/pdv/state.js"></script>
-
-    <script>
-
-        PDV.operador.id = {{ usuario.id }};
-
-        PDV.operador.nome = "{{ usuario.nome }}";
-
-    </script>
+</div>
 
 
-    <!-- ========================= -->
-    <!-- MÓDULOS -->
-    <!-- ========================= -->
+<!-- ========================================== -->
+<!-- ESTADO GLOBAL -->
+<!-- ========================================== -->
 
-    <script src="/static/js/pdv/events.js"></script>
+<script>
 
-    <script src="/static/js/pdv/eventBus.js"></script>
+PDV.operador.id={{usuario.id}};
 
-    <script src="/static/js/pdv/logger.js"></script>
+PDV.operador.nome="{{usuario.nome}}";
 
-    <script src="/static/js/pdv/developer.js"></script>
+</script>
 
-    <script src="/static/js/pdv/health.js"></script>
 
-    <script src="/static/js/pdv/api.js"></script>
+<!-- ========================================== -->
+<!-- SCRIPTS -->
+<!-- ========================================== -->
 
-    <script src="/static/js/pdv/scanner.js"></script>
+<script src="/static/js/pdv/config.js"></script>
 
-    <script src="/static/js/pdv/carrinho.js"></script>
+<script src="/static/js/pdv/state.js"></script>
 
-    <script src="/static/js/pdv/ui.js"></script>
+<script src="/static/js/pdv/events.js"></script>
 
-    <script src="/static/js/pdv/venda.js"></script>
+<script src="/static/js/pdv/eventBus.js"></script>
 
-    <script src="/static/js/pdv/app.js"></script>
+<script src="/static/js/pdv/logger.js"></script>
+
+<script src="/static/js/pdv/developer.js"></script>
+
+<script src="/static/js/pdv/health.js"></script>
+
+<script src="/static/js/pdv/api.js"></script>
+
+<script src="/static/js/pdv/scanner.js"></script>
+
+<script src="/static/js/pdv/carrinho.js"></script>
+
+<script src="/static/js/pdv/ui.js"></script>
+
+<script src="/static/js/pdv/venda.js"></script>
+
+<script src="/static/js/pdv/app.js"></script>
 
 </body>
 
