@@ -95,6 +95,14 @@ const App = {
 
         }
 
+        if(typeof Pagamento === "undefined"){
+
+        throw new Error(
+            "Pagamento não encontrado."
+        );
+
+}
+
     },
 
     iniciarModulos(){
@@ -139,6 +147,14 @@ const App = {
 
         );
 
+        Pagamento.iniciar();
+
+        Developer.registrarModulo(
+
+            "Pagamento"
+
+        );
+
         Venda.iniciar();
 
         Developer.registrarModulo(
@@ -146,6 +162,8 @@ const App = {
             "Venda"
 
         );
+
+        
 
     }
 
