@@ -191,6 +191,22 @@ def finalizar_venda(
         "valor_parcela",
         total
     )
+    
+    valor_recebido = dados.get(
+
+        "valor_recebido",
+
+        total
+
+    )
+
+    troco = dados.get(
+
+        "troco",
+
+        0
+
+    )
 
     venda = Sale(
         funcionario_id=funcionario_id,

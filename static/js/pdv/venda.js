@@ -52,39 +52,51 @@ const Venda = {
 
     montarVenda(){
 
-        return {
+        const pagamento = Pagamento.obterDados();
+
+        return{
 
             funcionario_id: PDV.operador.id,
 
-            pagamento: PDV.pagamento.forma,
+            pagamento: pagamento.forma,
 
             desconto: PDV.carrinho.desconto,
 
             total: PDV.carrinho.total,
 
-            parcelas: PDV.pagamento.parcelas,
+            parcelas: pagamento.parcelas,
 
             valor_parcela:
 
-                PDV.pagamento.parcelas > 0
+                pagamento.parcelas > 0
 
                 ? PDV.carrinho.total /
 
-                  PDV.pagamento.parcelas
+                pagamento.parcelas
 
                 : PDV.carrinho.total,
 
-            produtos: PDV.carrinho.produtos.map(
+            valor_recebido:
 
-                produto => ({
+                pagamento.valorRecebido,
 
-                    id: produto.id,
+            troco:
 
-                    quantidade: produto.quantidade
+                pagamento.troco,
 
-                })
+            produtos:
 
-            )
+                PDV.carrinho.produtos.map(
+
+                    produto=>({
+
+                        id:produto.id,
+
+                        quantidade:produto.quantidade
+
+                    })
+
+                )
 
         };
 
