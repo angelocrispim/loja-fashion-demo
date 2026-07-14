@@ -224,25 +224,7 @@ const Venda = {
 
         Carrinho.limpar();
 
-        UI.renderizar(
-
-            PDV.carrinho
-
-        );
-
-        const input = document.getElementById(
-
-            "codigo_produto"
-
-        );
-
-        if(input){
-
-            input.value = "";
-
-            input.focus();
-
-        }
+        UI.reset();
 
     }
 

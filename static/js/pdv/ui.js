@@ -109,6 +109,38 @@ const UI = {
 
         }
 
+    },
+
+    reset(){
+
+        document.getElementById("desconto").value = 0;
+
+        document.getElementById("forma_pagamento").value = "Dinheiro";
+
+        document.getElementById("valor_recebido").value = "";
+
+        document.getElementById("troco").innerHTML = "R$ 0,00";
+
+        PDV.pagamento.forma = "Dinheiro";
+
+        PDV.pagamento.valorRecebido = 0;
+
+        PDV.pagamento.troco = 0;
+
+        PDV.carrinho.desconto = 0;
+
+        this.renderizar(PDV.carrinho);
+
+        const input = document.getElementById("codigo_produto");
+
+        if(input){
+
+            input.value = "";
+
+            input.focus();
+
+        }
+
     }
 
 };
