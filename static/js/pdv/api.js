@@ -169,6 +169,54 @@ const API = {
 
         }
 
+    },
+
+    // ==========================================
+    // Gerar PIX
+    // ==========================================
+
+    async gerarPix(valor){
+
+        try{
+
+            return await this.request(
+
+                "/caixa/gerar-pix",
+
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":"application/json"
+
+                    },
+
+                    body:JSON.stringify({
+
+                        total:valor
+
+                    })
+
+                }
+
+            );
+
+        }
+
+        catch(erro){
+
+            return{
+
+                success:false,
+
+                mensagem:erro.message
+
+            };
+
+        }
+
     }
 
 };
