@@ -24,7 +24,8 @@ from models.cash_flow import CashFlow
 from models.user import User
 
 from utils.pix import gerar_qrcode
-
+import qrcode
+import os
 
 templates = Jinja2Templates(
     directory="templates"

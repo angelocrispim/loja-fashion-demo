@@ -186,9 +186,11 @@ const Pagamento = {
 
             <img
 
-                src="data:image/png;base64,${resposta.imagem}"
+                src="${resposta.imagem}"
 
                 width="220"
+
+                style="width:220px;height:220px;"
 
             >
 
