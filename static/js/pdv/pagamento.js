@@ -134,6 +134,20 @@ const Pagamento = {
 
         };
 
-    }
+    },
+
+    processarPagamento(){
+
+        if(PDV.pagamento.forma === "PIX"){
+
+            this.gerarPix();
+
+            return;
+
+        }
+
+        Venda.finalizar();
+
+    },
 
 };

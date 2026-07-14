@@ -175,48 +175,64 @@ const API = {
     // Gerar PIX
     // ==========================================
 
-    async gerarPix(valor){
+    async gerarPix(){
 
-        try{
+        const resposta = await API.gerarPix(
 
-            return await this.request(
+            PDV.carrinho.total
 
-                "/caixa/gerar-pix",
+        );
 
-                {
+        if(!resposta.success){
 
-                    method:"POST",
+            alert("Erro ao gerar PIX.");
 
-                    headers:{
-
-                        "Content-Type":"application/json"
-
-                    },
-
-                    body:JSON.stringify({
-
-                        total:valor
-
-                    })
-
-                }
-
-            );
+            return;
 
         }
 
-        catch(erro){
+        document.getElementById(
 
-            return{
+            "painel_pagamento"
 
-                success:false,
+        ).innerHTML = `
 
-                mensagem:erro.message
+            <h3>Pagamento PIX</h3>
 
-            };
+            <img
 
-        }
+                src="data:image/png;base64,${resposta.imagem}"
 
-    }
+                width="220"
+
+            >
+
+            <br><br>
+
+            <button
+
+                id="confirmar_pix"
+
+                class="btn-verde"
+
+            >
+
+                Confirmar Pagamento
+
+            </button>
+
+        `;
+
+        document.getElementById(
+
+            "confirmar_pix"
+
+        ).onclick = ()=>{
+
+            Venda.finalizar();
+
+        };
+
+    },
 
 };
