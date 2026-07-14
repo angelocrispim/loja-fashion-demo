@@ -168,6 +168,8 @@ const Pagamento = {
 
         );
 
+        console.log(resposta);
+
         if(!resposta.success){
 
             alert("Erro ao gerar PIX");
