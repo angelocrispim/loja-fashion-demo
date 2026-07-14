@@ -76,6 +76,8 @@ const Pagamento = {
 
         this.forma = this.selectForma.value;
 
+        PDV.pagamento.forma = this.forma;
+
         if(this.forma === "Dinheiro"){
 
             this.inputValor.disabled = false;
@@ -138,7 +140,7 @@ const Pagamento = {
 
     processarPagamento(){
 
-        if(PDV.pagamento.forma === "PIX"){
+        if(this.forma === "PIX"){
 
             this.gerarPix();
 
@@ -147,6 +149,70 @@ const Pagamento = {
         }
 
         Venda.finalizar();
+
+    },
+
+    async gerarPix(){
+
+    const modal = document.getElementById(
+
+        "modal_pix"
+
+    );
+
+    modal.style.display = "flex";
+
+        const resposta = await API.gerarPix(
+
+            PDV.carrinho.total
+
+        );
+
+        if(!resposta.success){
+
+            alert("Erro ao gerar PIX");
+
+            return;
+
+        }
+
+        document.getElementById(
+
+            "pix_qrcode"
+
+        ).innerHTML = `
+
+            <img
+
+                src="data:image/png;base64,${resposta.imagem}"
+
+                width="220"
+
+            >
+
+        `;
+
+        document.getElementById(
+
+            "confirmar_pix"
+
+        ).onclick = ()=>{
+
+            this.fecharModalPix();
+
+            Venda.finalizar();
+
+        };
+
+    },
+
+    fecharModalPix(){
+
+        document.getElementById(
+
+            "modal_pix"
+
+        ).style.display="none";
 
     },
 
