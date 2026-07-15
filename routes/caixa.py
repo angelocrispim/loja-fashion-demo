@@ -423,6 +423,30 @@ def detalhes_venda(
         }
     )
     
+def gerar_qrcode(valor):
+    
+    pasta = "static/imagens"
+
+    os.makedirs(pasta, exist_ok=True)
+
+    caminho = os.path.join(
+
+        pasta,
+
+        "pix_teste.png"
+
+    )
+
+    qr = qrcode.make(
+
+        f"PIX TESTE\nValor: R$ {valor:.2f}"
+
+    )
+
+    qr.save(caminho)
+
+    return "/static/imagens/pix_teste.png"
+    
 #################################
 # GERAR PIX
 #################################
