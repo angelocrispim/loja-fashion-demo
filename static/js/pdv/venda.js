@@ -174,11 +174,7 @@ const Venda = {
 
             );
 
-            alert(
-
-                `Venda Nº ${resposta.venda_id} realizada com sucesso.`
-
-            );
+            Pagamento.abrirComprovante(resposta);
 
             this.limpar();
 

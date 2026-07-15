@@ -407,3 +407,27 @@ button:hover{
     margin:15px 0;
 
 }
+
+#conteudo_comprovante{
+
+    text-align:left;
+
+    font-size:17px;
+
+    line-height:28px;
+
+}
+
+#conteudo_comprovante h2{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+#conteudo_comprovante hr{
+
+    margin:12px 0;
+
+}

@@ -381,6 +381,106 @@ const Pagamento = {
 
     },
 
+    abrirComprovante(venda){
+
+        const modal = document.getElementById(
+
+            "modal_comprovante"
+
+        );
+
+        modal.style.display = "flex";
+
+        document.getElementById(
+
+            "conteudo_comprovante"
+
+        ).innerHTML = `
+
+            <h2>
+
+                LOJA FASHION
+
+            </h2>
+
+            <h3>
+
+                CUPOM DE VENDA
+
+            </h3>
+
+            <hr>
+
+            <p>
+
+                <strong>Venda:</strong>
+
+                Nº ${venda.venda_id}
+
+            </p>
+
+            <p>
+
+                <strong>Operador:</strong>
+
+                ${PDV.operador.nome}
+
+            </p>
+
+            <p>
+
+                <strong>Forma:</strong>
+
+                ${Pagamento.forma}
+
+            </p>
+
+            <hr>
+
+            <h3>
+
+                TOTAL
+
+            </h3>
+
+            <h2>
+
+                R$ ${PDV.carrinho.total.toFixed(2)}
+
+            </h2>
+
+            <hr>
+
+            <p>
+
+                Obrigado pela preferência!
+
+            </p>
+
+        `;
+
+        document.getElementById(
+
+            "btn_imprimir"
+
+        ).onclick = ()=>{
+
+            window.print();
+
+        };
+
+    },
+
+    fecharComprovante(){
+
+        document.getElementById(
+
+            "modal_comprovante"
+
+        ).style.display = "none";
+
+    },
+
     fecharModalPix(){
 
         document.getElementById(
