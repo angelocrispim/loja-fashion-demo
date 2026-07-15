@@ -290,13 +290,110 @@ const Pagamento = {
 
     },
 
+    abrirCredito(){
+
+        const modal = document.getElementById("modal_pix");
+
+        modal.style.display = "flex";
+
+        document.querySelector("#modal_pix h2").innerHTML =
+            "Pagamento Crédito";
+
+        document.getElementById("pix_qrcode").innerHTML = `
+
+            <img
+
+                src="/static/imagens/cartao_debito.png"
+
+                width="180"
+
+            >
+
+        `;
+
+        document.getElementById("pix_status").innerHTML =
+
+            "Selecione o parcelamento";
+
+        document.getElementById("credito_parcelas").style.display =
+
+            "block";
+
+        const parcelas = document.getElementById(
+
+            "parcelas_credito"
+
+        );
+
+        const valor = document.getElementById(
+
+            "valor_parcela"
+
+        );
+
+        valor.innerHTML =
+
+            `1x de R$ ${PDV.carrinho.total.toFixed(2)}`;
+
+        parcelas.onchange = ()=>{
+
+            const qtd = parseInt(parcelas.value);
+
+            const parcela = PDV.carrinho.total / qtd;
+
+            valor.innerHTML =
+
+                `${qtd}x de R$ ${parcela.toFixed(2)}`;
+
+        };
+
+        const btn = document.getElementById(
+
+            "confirmar_pix"
+
+        );
+
+        btn.innerHTML = "Confirmar Pagamento";
+
+        btn.disabled = false;
+
+        btn.onclick = ()=>{
+
+            btn.innerHTML = "✔ Pagamento Aprovado";
+
+            btn.style.background = "#16a34a";
+
+            setTimeout(()=>{
+
+                document.getElementById(
+
+                    "credito_parcelas"
+
+                ).style.display = "none";
+
+                this.fecharModalPix();
+
+                Venda.finalizar();
+
+            },1000);
+
+        };
+
+    },
+
     fecharModalPix(){
 
         document.getElementById(
 
             "modal_pix"
 
-        ).style.display="none";
+        ).style.display = "none";
+
+        document.getElementById(
+
+            "credito_parcelas"
+
+        ).style.display = "none";
 
     },
 
