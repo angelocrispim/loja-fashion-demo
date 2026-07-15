@@ -198,15 +198,17 @@ const Pagamento = {
 
         const btn = document.getElementById("confirmar_pix");
 
-        btn.style.opacity = "1";
+        btn.disabled = false;
 
-        btn.style.cursor = "pointer";
+        btn.innerHTML = "Confirmar Pagamento";
 
         btn.onclick = ()=>{
 
             btn.innerHTML = "✔ Pagamento Confirmado";
 
-            btn.style.background = "#16a34a";
+            btn.style.background="#16a34a";
+
+            btn.style.color="#fff";
 
             setTimeout(()=>{
 
@@ -217,7 +219,6 @@ const Pagamento = {
             },800);
 
         };
-
     },
 
     fecharModalPix(){

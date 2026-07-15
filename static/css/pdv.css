@@ -281,3 +281,47 @@ button:hover{
     text-align:center;
 
 }
+
+.btn-verde{
+
+    background:#16a34a;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.btn-verde:hover{
+
+    background:#15803d;
+
+    transform:scale(1.02);
+
+}
+
+.btn-vermelho{
+
+    background:#dc2626;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.btn-vermelho:hover{
+
+    background:#b91c1c;
+
+}
