@@ -315,6 +315,14 @@ const Pagamento = {
 
             "Selecione o parcelamento";
 
+        document.getElementById(
+
+            "valor_modal"
+
+        ).innerHTML =
+
+            `R$ ${PDV.carrinho.total.toFixed(2)}`;
+
         document.getElementById("credito_parcelas").style.display =
 
             "block";
@@ -478,6 +486,8 @@ const Pagamento = {
             "modal_comprovante"
 
         ).style.display = "none";
+
+        Venda.limpar();
 
     },
 

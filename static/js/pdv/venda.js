@@ -176,8 +176,6 @@ const Venda = {
 
             Pagamento.abrirComprovante(resposta);
 
-            this.limpar();
-
         }
 
         catch(erro){
