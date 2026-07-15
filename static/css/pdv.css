@@ -325,3 +325,85 @@ button:hover{
     background:#b91c1c;
 
 }
+
+/* ===========================
+   PAGAMENTO CRÉDITO
+=========================== */
+
+#credito_parcelas{
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+#credito_parcelas label{
+
+    display:block;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#374151;
+
+    margin-bottom:10px;
+
+}
+
+#parcelas_credito{
+
+    width:230px;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    border:2px solid #d1d5db;
+
+    font-size:18px;
+
+    text-align:center;
+
+    background:white;
+
+    cursor:pointer;
+
+    margin-bottom:15px;
+
+}
+
+#parcelas_credito:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 8px rgba(37,99,235,.25);
+
+}
+
+#valor_parcela{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+    margin-top:10px;
+
+}
+
+#valor_modal{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#111827;
+
+    margin:15px 0;
+
+}
