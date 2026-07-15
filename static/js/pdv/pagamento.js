@@ -196,15 +196,25 @@ const Pagamento = {
 
         `;
 
-        document.getElementById(
+        const btn = document.getElementById("confirmar_pix");
 
-            "confirmar_pix"
+        btn.style.opacity = "1";
 
-        ).onclick = ()=>{
+        btn.style.cursor = "pointer";
 
-            this.fecharModalPix();
+        btn.onclick = ()=>{
 
-            Venda.finalizar();
+            btn.innerHTML = "✔ Pagamento Confirmado";
+
+            btn.style.background = "#16a34a";
+
+            setTimeout(()=>{
+
+                this.fecharModalPix();
+
+                Venda.finalizar();
+
+            },800);
 
         };
 
