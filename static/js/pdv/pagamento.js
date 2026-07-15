@@ -140,15 +140,28 @@ const Pagamento = {
 
     processarPagamento(){
 
-        if(this.forma === "PIX"){
+        switch(this.forma){
 
-            this.gerarPix();
+            case "PIX":
 
-            return;
+                this.gerarPix();
+                break;
+
+            case "Cartão Débito":
+
+                this.abrirDebito();
+                break;
+
+            case "Cartão Crédito":
+
+                this.abrirCredito();
+                break;
+
+            default:
+
+                Venda.finalizar();
 
         }
-
-        Venda.finalizar();
 
     },
 
@@ -219,6 +232,49 @@ const Pagamento = {
             },800);
 
         };
+    },
+
+    abrirDebito(){
+
+        const modal = document.getElementById("modal_pix");
+
+        modal.style.display = "flex";
+
+        document.getElementById("pix_qrcode").innerHTML = `
+
+            <img
+                src="/static/imagens/cartao_debito.png"
+                width="180"
+            >
+
+        `;
+
+        document.querySelector("#modal_pix h2").innerHTML =
+            "Pagamento Débito";
+
+        document.querySelector("#modal_pix p").innerHTML =
+            "Aguardando aprovação da maquininha...";
+
+        const btn = document.getElementById("confirmar_pix");
+
+        btn.innerHTML = "Confirmar Pagamento";
+
+        btn.onclick = ()=>{
+
+            btn.innerHTML = "✔ Pagamento Aprovado";
+
+            btn.style.background="#16a34a";
+
+            setTimeout(()=>{
+
+                this.fecharModalPix();
+
+                Venda.finalizar();
+
+            },800);
+
+        };
+
     },
 
     fecharModalPix(){
