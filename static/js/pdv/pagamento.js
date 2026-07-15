@@ -140,24 +140,37 @@ const Pagamento = {
 
     processarPagamento(){
 
+        console.log("Forma selecionada:", this.forma);
+
         switch(this.forma){
 
             case "PIX":
 
+                console.log("Entrou no PIX");
+
                 this.gerarPix();
+
                 break;
 
             case "Cartão Débito":
 
+                console.log("Entrou no Débito");
+
                 this.abrirDebito();
+
                 break;
 
             case "Cartão Crédito":
 
+                console.log("Entrou no Crédito");
+
                 this.abrirCredito();
+
                 break;
 
             default:
+
+                console.log("Entrou no Dinheiro");
 
                 Venda.finalizar();
 
