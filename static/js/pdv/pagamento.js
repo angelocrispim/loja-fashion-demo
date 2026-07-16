@@ -367,6 +367,8 @@ const Pagamento = {
 
         btn.onclick = ()=>{
 
+            console.log("CLICOU EM CONFIRMAR");
+
             btn.innerHTML = "✔ Pagamento Aprovado";
 
             btn.style.background = "#16a34a";
