@@ -42,7 +42,7 @@ def tela_caixa(
 
     return templates.TemplateResponse(
     request=request,
-    name="admin/caixa.html",
+    name="admin/pdv.html",
     context={
         "usuario": usuario,
         "funcionarios": funcionarios
