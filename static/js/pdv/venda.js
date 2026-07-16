@@ -24,18 +24,6 @@ const Venda = {
             "btn_cancelar"
         );
 
-        if(this.btnFinalizar){
-
-            this.btnFinalizar.addEventListener(
-
-                "click",
-
-                ()=>this.finalizar()
-
-            );
-
-        }
-
         if(this.btnCancelar){
 
             this.btnCancelar.addEventListener(
