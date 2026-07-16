@@ -274,7 +274,7 @@ def login(
     elif usuario.cargo == "Caixa":
 
         response = RedirectResponse(
-            url="/caixa",
+            url="/pdv/pdv",
             status_code=302
         )
 

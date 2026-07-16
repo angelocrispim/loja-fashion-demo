@@ -86,7 +86,7 @@ def login_caixa(
         )
 
     response = RedirectResponse(
-        url="/caixa",
+        url="/pdv",
         status_code=302
     )
 
