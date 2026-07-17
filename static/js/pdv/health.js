@@ -1,23 +1,99 @@
 // ==============================================
-// LOJA FASHION PDV
+// LOJA FASHION ERP
 // Health Check
 // ==============================================
 
 const Health = {
 
-    verificar(){
+    verificar() {
 
-        Logger.info("Executando diagnóstico...");
+        Logger.info("=====================================");
+        Logger.info("Executando diagnóstico do sistema...");
+        Logger.info("=====================================");
 
-        Logger.sucesso("PDV OK");
+        this.verificarSistema();
+        this.verificarAPI();
+        this.verificarScanner();
+        this.verificarCarrinho();
+        this.verificarUI();
 
-        Logger.sucesso("API OK");
+        Logger.info("=====================================");
+        Logger.info("Diagnóstico finalizado.");
+        Logger.info("=====================================");
 
-        Logger.sucesso("Scanner OK");
+    },
 
-        Logger.sucesso("Carrinho OK");
+    verificarSistema() {
 
-        Logger.sucesso("UI OK");
+        if (PDV) {
+
+            Logger.sucesso("Sistema OK");
+
+        } else {
+
+            Logger.erro("Sistema não inicializado");
+
+        }
+
+    },
+
+    verificarAPI() {
+
+        if (PDV.sistema.online) {
+
+            Logger.sucesso("API Online");
+
+        } else {
+
+            Logger.erro("API Offline");
+
+        }
+
+    },
+
+    verificarScanner() {
+
+        if (!CONFIG.scanner.bloquearLeitura) {
+
+            Logger.sucesso("Scanner OK");
+
+        } else {
+
+            Logger.alerta("Scanner bloqueado");
+
+        }
+
+    },
+
+    verificarCarrinho() {
+
+        if (Array.isArray(PDV.carrinho.produtos)) {
+
+            Logger.sucesso(
+                `Carrinho OK (${PDV.carrinho.produtos.length} produtos)`
+            );
+
+        } else {
+
+            Logger.erro("Carrinho inválido");
+
+        }
+
+    },
+
+    verificarUI() {
+
+        const tela = document.getElementById("lista_produtos");
+
+        if (tela) {
+
+            Logger.sucesso("Interface OK");
+
+        } else {
+
+            Logger.erro("Interface não encontrada");
+
+        }
 
     }
 

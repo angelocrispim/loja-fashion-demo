@@ -8,16 +8,6 @@ const EventBus = {
 
     eventos: {},
 
-    iniciar(){
-
-        Logger.info(
-
-            "EventBus iniciado."
-
-        );
-
-    },
-
     on(nomeEvento, callback){
 
         if(!this.eventos[nomeEvento]){
@@ -26,51 +16,51 @@ const EventBus = {
 
         }
 
-        this.eventos[nomeEvento].push(
+        if(!this.eventos[nomeEvento].includes(callback)){
 
-            callback
+            this.eventos[nomeEvento].push(callback);
 
-        );
+        }
 
     },
 
     emit(nomeEvento, dados = null){
 
-        if(!this.eventos[nomeEvento]){
+        if(!this.eventos[nomeEvento]) return;
 
-            return;
+        Logger.info(`Evento: ${nomeEvento}`);
 
-        }
+        this.eventos[nomeEvento].forEach(callback => {
 
-        Logger.info(
+            try{
 
-            `Evento: ${nomeEvento}`
+                callback(dados);
 
-        );
+            }catch(error){
 
-        this.eventos[nomeEvento].forEach(
+                Logger.error(error);
 
-            callback => callback(dados)
+            }
 
-        );
+        });
 
     },
 
     off(nomeEvento, callback){
 
-        if(!this.eventos[nomeEvento]){
+        if(!this.eventos[nomeEvento]) return;
 
-            return;
+        this.eventos[nomeEvento] = this.eventos[nomeEvento].filter(
+            evento => evento !== callback
+        );
 
-        }
+    },
 
-        this.eventos[nomeEvento] =
+    limpar(){
 
-            this.eventos[nomeEvento].filter(
+        this.eventos = {};
 
-                evento => evento !== callback
-
-            );
+        Logger.info("Eventos removidos.");
 
     }
 

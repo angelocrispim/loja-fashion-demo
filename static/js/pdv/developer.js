@@ -9,53 +9,39 @@ const Developer = {
 
     eventos: [],
 
+    ativo(){
+
+        return CONFIG.sistema.developerMode;
+
+    },
+
     iniciar(){
 
-        if(!CONFIG.sistema.developerMode){
+        if(!this.ativo()) return;
 
-            return;
-
-        }
-
-        Logger.info(
-
-            "Developer Mode ativado."
-
-        );
+        Logger.info("Developer Mode ativado.");
 
     },
 
     registrarModulo(nome){
 
-        if(!CONFIG.sistema.developerMode){
-
-            return;
-
-        }
+        if(!this.ativo()) return;
 
         this.modulos.push({
 
             nome,
 
-            horario:new Date()
+            horario: new Date().toLocaleTimeString("pt-BR")
 
         });
 
-        console.log(
-
-            `✅ ${nome} carregado.`
-
-        );
+        Logger.sucesso(`${nome} carregado.`);
 
     },
 
     registrarEvento(modulo, descricao){
 
-        if(!CONFIG.sistema.developerMode){
-
-            return;
-
-        }
+        if(!this.ativo()) return;
 
         this.eventos.push({
 
@@ -63,35 +49,27 @@ const Developer = {
 
             descricao,
 
-            horario:new Date()
+            horario: new Date().toLocaleTimeString("pt-BR")
 
         });
 
-        console.log(
-
-            `📌 ${modulo}: ${descricao}`
-
-        );
+        Logger.info(`${modulo}: ${descricao}`);
 
     },
 
     listarModulos(){
 
-        console.table(
+        if(!this.ativo()) return;
 
-            this.modulos
-
-        );
+        console.table(this.modulos);
 
     },
 
     listarEventos(){
 
-        console.table(
+        if(!this.ativo()) return;
 
-            this.eventos
-
-        );
+        console.table(this.eventos);
 
     }
 

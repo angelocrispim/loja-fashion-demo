@@ -7,73 +7,49 @@ const Logger = {
 
     horario(){
 
-        return new Date().toLocaleTimeString();
+        return new Date().toLocaleTimeString("pt-BR");
+
+    },
+
+    registrar(consoleMetodo, icone, tipo, mensagem){
+
+        consoleMetodo(
+
+            `[${this.horario()}] ${icone} ${tipo}:`,
+
+            mensagem
+
+        );
 
     },
 
     info(mensagem){
 
-        if(!CONFIG.sistema.developerMode){
+        if(!CONFIG.sistema.developerMode) return;
 
-            return;
-
-        }
-
-        console.log(
-
-            `[${this.horario()}] 📘 INFO:`,
-
-            mensagem
-
-        );
+        this.registrar(console.info, "📘", "INFO", mensagem);
 
     },
 
     sucesso(mensagem){
 
-        if(!PDV.sistema.developerMode){
+        if(!CONFIG.sistema.developerMode) return;
 
-            return;
-
-        }
-
-        console.log(
-
-            `[${this.horario()}] ✅ SUCESSO:`,
-
-            mensagem
-
-        );
+        this.registrar(console.log, "✅", "SUCESSO", mensagem);
 
     },
 
     alerta(mensagem){
 
-        if(!PDV.sistema.developerMode){
+        if(!CONFIG.sistema.developerMode) return;
 
-            return;
-
-        }
-
-        console.warn(
-
-            `[${this.horario()}] ⚠️ ALERTA:`,
-
-            mensagem
-
-        );
+        this.registrar(console.warn, "⚠️", "ALERTA", mensagem);
 
     },
 
     erro(mensagem){
 
-        console.error(
-
-            `[${this.horario()}] ❌ ERRO:`,
-
-            mensagem
-
-        );
+        this.registrar(console.error, "❌", "ERRO", mensagem);
 
     }
 

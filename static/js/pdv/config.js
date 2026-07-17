@@ -1,6 +1,6 @@
 // ==============================================
-// LOJA FASHION PDV
-// Configurações do Sistema
+// LOJA FASHION ERP
+// Configurações Globais
 // ==============================================
 
 const CONFIG = {
@@ -9,7 +9,7 @@ const CONFIG = {
 
         nome: "Loja Fashion PDV",
 
-        versao: "2.0.0",
+        versao: "1.0.0",
 
         developerMode: true
 
@@ -24,6 +24,8 @@ const CONFIG = {
     },
 
     api: {
+
+        // URL da API
 
         baseURL: "https://loja-fashion-demo.onrender.com",
 
